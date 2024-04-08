@@ -1,0 +1,91 @@
+{% load static tailwind_tags %}
+<head>
+          {% tailwind_css %}
+          <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+</head>
+<body>
+          <div class="font-[sans-serif] text-[#333]">
+                    <div class="min-h-screen flex flex-col items-center justify-center">
+                      <div class="grid md:grid-cols-2 items-center gap-4 max-w-6xl w-full p-4 m-4 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] rounded-md">
+                        <div class="md:max-w-md w-full sm:px-6 py-4">
+                              <form class="max-w-lg w-full mx-auto">
+                                        <div class="mb-12">
+                                          <h3 class=" md:text-3xl text-2xl font-extrabold max-md:text-center">Demander Un Compte</h3>
+                                        </div>
+                                        <div>
+                                          <label class="text-xs block mb-2">Nom et prénom</label>
+                                          <div class="relative flex items-center">
+                                            <input name="name" type="text" required class="w-full bg-transparent text-sm border-b border-gray-300 focus:border-blue-500 px-2 py-3 outline-none" placeholder="Entrer Votre nom et prénom" />
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="#bbb" stroke="#bbb" class="w-[18px] h-[18px] absolute right-2" viewBox="0 0 24 24">
+                                              <circle cx="10" cy="7" r="6" data-original="#000000"></circle>
+                                              <path d="M14 15H6a5 5 0 0 0-5 5 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 5 5 0 0 0-5-5zm8-4h-2.59l.3-.29a1 1 0 0 0-1.42-1.42l-2 2a1 1 0 0 0 0 1.42l2 2a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42l-.3-.29H22a1 1 0 0 0 0-2z" data-original="#000000"></path>
+                                            </svg>
+                                          </div>
+                                        </div>
+                                        <div class="mt-10">
+                                          <label class="text-xs block mb-2">CNI</label>
+                                          <div class="relative flex items-center">
+                                            <input name="email" type="text" required class="w-full bg-transparent text-sm border-b border-gray-300 focus:border-blue-500 px-2 py-3 outline-none" placeholder="Entrer Votre CNI" />
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="#bbb" stroke="#bbb" class="w-[18px] h-[18px] absolute right-2" viewBox="0 0 682.667 682.667">
+                                              <defs>
+                                                <clipPath id="a" clipPathUnits="userSpaceOnUse">
+                                                  <path d="M0 512h512V0H0Z" data-original="#000000"></path>
+                                                </clipPath>
+                                              </defs>
+                                              <g clip-path="url(#a)" transform="matrix(1.33 0 0 -1.33 0 682.667)">
+                                                <path fill="none" stroke-miterlimit="10" stroke-width="40" d="M452 444H60c-22.091 0-40-17.909-40-40v-39.446l212.127-157.782c14.17-10.54 33.576-10.54 47.746 0L492 364.554V404c0 22.091-17.909 40-40 40Z" data-original="#000000"></path>
+                                                <path d="M472 274.9V107.999c0-11.027-8.972-20-20-20H60c-11.028 0-20 8.973-20 20V274.9L0 304.652V107.999c0-33.084 26.916-60 60-60h392c33.084 0 60 26.916 60 60v196.653Z" data-original="#000000"></path>
+                                              </g>
+                                            </svg>
+                                          </div>
+                                        </div>
+                                        <div class="mt-10">
+                                                  <label class="text-xs block mb-2">E-mail</label>
+                                                  <div class="relative flex items-center">
+                                                    <input name="email" type="text" required class="w-full bg-transparent text-sm border-b border-gray-300 focus:border-blue-500 px-2 py-3 outline-none" placeholder="Enter Votre e-mail" />
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="#bbb" stroke="#bbb" class="w-[18px] h-[18px] absolute right-2" viewBox="0 0 682.667 682.667">
+                                                      <defs>
+                                                        <clipPath id="a" clipPathUnits="userSpaceOnUse">
+                                                          <path d="M0 512h512V0H0Z" data-original="#000000"></path>
+                                                        </clipPath>
+                                                      </defs>
+                                                      <g clip-path="url(#a)" transform="matrix(1.33 0 0 -1.33 0 682.667)">
+                                                        <path fill="none" stroke-miterlimit="10" stroke-width="40" d="M452 444H60c-22.091 0-40-17.909-40-40v-39.446l212.127-157.782c14.17-10.54 33.576-10.54 47.746 0L492 364.554V404c0 22.091-17.909 40-40 40Z" data-original="#000000"></path>
+                                                        <path d="M472 274.9V107.999c0-11.027-8.972-20-20-20H60c-11.028 0-20 8.973-20 20V274.9L0 304.652V107.999c0-33.084 26.916-60 60-60h392c33.084 0 60 26.916 60 60v196.653Z" data-original="#000000"></path>
+                                                      </g>
+                                                    </svg>
+                                                  </div>
+                                                </div>
+                                                <div class="mt-10">
+                                                  <label class="text-xs block mb-2">Numéro de Téléphone</label>
+                                                  <div class="relative flex items-center">
+                                                    <input name="email" type="text" required class="w-full bg-transparent text-sm border-b border-gray-300 focus:border-blue-500 px-2 py-3 outline-none" placeholder="Enter Votre numéro de téléphone" />
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="#bbb" stroke="#bbb" class="w-[18px] h-[18px] absolute right-2" viewBox="0 0 682.667 682.667">
+                                                      <defs>
+                                                        <clipPath id="a" clipPathUnits="userSpaceOnUse">
+                                                          <path d="M0 512h512V0H0Z" data-original="#000000"></path>
+                                                        </clipPath>
+                                                      </defs>
+                                                      <g clip-path="url(#a)" transform="matrix(1.33 0 0 -1.33 0 682.667)">
+                                                        <path fill="none" stroke-miterlimit="10" stroke-width="40" d="M452 444H60c-22.091 0-40-17.909-40-40v-39.446l212.127-157.782c14.17-10.54 33.576-10.54 47.746 0L492 364.554V404c0 22.091-17.909 40-40 40Z" data-original="#000000"></path>
+                                                        <path d="M472 274.9V107.999c0-11.027-8.972-20-20-20H60c-11.028 0-20 8.973-20 20V274.9L0 304.652V107.999c0-33.084 26.916-60 60-60h392c33.084 0 60 26.916 60 60v196.653Z" data-original="#000000"></path>
+                                                      </g>
+                                                    </svg>
+                                                  </div>
+                                                </div>
+                                        
+                                        <div class="mt-12">
+                                          <button type="button" class="w-full py-2.5 px-8 text-sm font-semibold rounded bg-black text-white border focus:outline-none">
+                                            Envoyer la Demande
+                                          </button>
+                                          <p class="text-sm mt-8">Vous avez déjà un compte? <a href="{% url 'login' %}" class="text-yellow-400 font-semibold hover:underline ml-1">Connectez-vous ici</a></p>
+                                        </div>
+                                      </form>
+                        </div>
+                        <div class="md:h-full max-md:mt-10 bg-gray-50 rounded-xl lg:p-12 p-8">
+                          <img src="https://readymadeui.com/signin-image.webp" class="w-full h-full object-contain" alt="login-image" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>   
+</body>
