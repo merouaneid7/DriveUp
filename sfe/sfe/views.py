@@ -23,6 +23,11 @@ def approve_user(request,user_id):
     user.save()
     return HttpResponse("DONE")
     
+def delete_user(request,user_id):
+    user= User.objects.get(pk=user_id)
+    user.delete()
+    return redirect(uerslist)
+
 
 
 def user_login(request):

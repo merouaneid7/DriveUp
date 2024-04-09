@@ -9,5 +9,6 @@ urlpatterns = [
     path('authentication/signup',views.signup,name="signup"),
     path('authentication/login',views.user_login,name="login"),
     path('userlist',views.uerslist,name="uerslist"),
-    path('approve_user/<int:user_id>',views.approve_user,name="approve_user")
+    path('approve_user/<int:user_id>',views.approve_user,name="approve_user"),
+    path('delete_user/<int:user_id>',views.delete_user,name="delete_user"),
 ]

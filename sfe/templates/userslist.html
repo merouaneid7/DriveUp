@@ -30,7 +30,7 @@
                         <td class="border px-4 py-2">
                             <a href="" class="inline-block px-3 py-1 text-sm leading-normal bg-blue-500 text-black rounded-lg hover:bg-blue-600">Details</a>
                             <a href="{% url 'approve_user' user_id=user.id %} " class="inline-block px-3 py-1 text-sm leading-normal bg-green-500 text-black rounded-lg hover:bg-green-600">Add to Group</a>
-                            <a href="" class="inline-block px-3 py-1 text-sm leading-normal bg-red-500 text-black rounded-lg hover:bg-red-600">Delete</a>
+                            <a href="{% url 'delete_user' user_id=user.id %}" class="inline-block px-3 py-1 text-sm leading-normal bg-red-500 text-black rounded-lg hover:bg-red-600">Delete</a>
                         </td>
                     </tr>
                     {% endfor %}
