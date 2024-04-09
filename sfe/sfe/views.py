@@ -14,7 +14,7 @@ def uerslist(request):
     context = {
         'users' : users,
     }
-    return render(request,"userslist.html",context)
+    return render(request,"adm/userslist.html",context)
 
 
 def approve_user(request,user_id):
@@ -41,8 +41,10 @@ def user_login(request):
         if user is not None and user.is_active is True:
             login(request, user)
             return redirect('home')  
+        elif user is None:
+            messages.error(request, 'Email ou mot de passe invalide')
         else:
-            messages.error(request, 'Invalid email or password.')
+            messages.warning(request,"Votre compte n'est pas activé ")
     return render(request, 'auth/login.html')
 
 
@@ -58,11 +60,11 @@ def signup(request):
 
         if User.objects.filter(email=email).exists():
            
-           messages.warning(request,'Email are Already Exists !')
+           messages.error(request,"Ce e-mail existe déjà ")
            return redirect('signup')
 
         if User.objects.filter(username=username).exists():
-           messages.warning(request,'Username are Already exists !')
+           messages.error(request,"Le nom d'utilisateur existe déjà ")
            return redirect('signup')
         
         user = User.objects.create_user(username=username,email=email,password=password)

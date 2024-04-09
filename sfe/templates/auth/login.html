@@ -8,6 +8,7 @@
                     <div class="min-h-screen flex flex-col items-center justify-center">
                       <div class="grid md:grid-cols-2 items-center gap-4 max-w-6xl w-full p-4 m-4 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] rounded-md">
                         <div class="md:max-w-md w-full sm:px-6 py-4">
+                          {% include "msg/msg.html" %}
                           <form method="post" action="{% url 'login' %}">
                             {% csrf_token %}
                             <div class="mb-12">
@@ -60,12 +61,13 @@
                               </div>
                             </div>
                             <div class="mt-12">
-                              <button type="submit" name="btns" class="w-full shadow-xl py-2.5 px-4 text-sm font-semibold rounded text-white bg-black focus:outline-none">
+                              <button type="submit" name="btns" class="w-full shadow-xl py-2.5 px-4 text-sm font-semibold rounded text-white bg-gray-700 focus:outline-none">
                                         Se connecter
                               </button>
                             </div>
                           
                           </form>
+                          
                           
                         </div>
                         <div class="md:h-full max-md:mt-10 bg-gray-50 rounded-xl lg:p-12 p-8">
