@@ -8,15 +8,21 @@
                     <div class="min-h-screen flex flex-col items-center justify-center">
                       <div class="grid md:grid-cols-2 items-center gap-4 max-w-6xl w-full p-4 m-4 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] rounded-md">
                         <div class="md:max-w-md w-full sm:px-6 py-4">
-                          <form>
+                          <form method="post" action="{% url 'login' %}">
+                            {% csrf_token %}
                             <div class="mb-12">
+                              <div class="pb-4 ">
+                              <a href="{% url 'home' %}"><svg class="w-3 inline-block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg>
+                              <h3 class="inline-block font-bold">Acceuil</h3>
+                              </a>
+                            </div>
                               <h3 class="text-3xl font-extrabold">Se connecter</h3>
                               <p class="text-sm mt-4 ">Vous n'avez pas de compte<a href="{% url 'signup' %}" class="text-yellow-400 font-semibold hover:underline ml-1 whitespace-nowrap">Demander Un compte</a></p>
                             </div>
                             <div>
                               <label class="text-xs block mb-2">E-mail</label>
                               <div class="relative flex items-center">
-                                <input name="email" type="text" required class="w-full text-sm border-b border-gray-300 focus:border-[#333] px-2 py-3 outline-none" placeholder="Enter email" />
+                                <input name="email" id="email" type="email" required class="w-full text-sm border-b border-gray-300 focus:border-[#333] px-2 py-3 outline-none" placeholder="Enter email" />
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="#bbb" stroke="#bbb" class="w-[18px] h-[18px] absolute right-2" viewBox="0 0 682.667 682.667">
                                   <defs>
                                     <clipPath id="a" clipPathUnits="userSpaceOnUse">
@@ -30,10 +36,11 @@
                                 </svg>
                               </div>
                             </div>
+                            
                             <div class="mt-8">
                               <label class="text-xs block mb-2 ">Mot de passe</label>
                               <div class="relative flex items-center">
-                                <input name="password" type="password" required class="w-full text-sm border-b border-gray-300 focus:border-[#333] px-2 py-3 outline-none" placeholder="Enter password" />
+                                <input name="password" id="password" type="password" required class="w-full text-sm border-b border-gray-300 focus:border-[#333] px-2 py-3 outline-none" placeholder="Enter password" />
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="#bbb" stroke="#bbb" class="w-[18px] h-[18px] absolute right-2 cursor-pointer" viewBox="0 0 128 128">
                                   <path d="M64 104C22.127 104 1.367 67.496.504 65.943a4 4 0 0 1 0-3.887C1.367 60.504 22.127 24 64 24s62.633 36.504 63.496 38.057a4 4 0 0 1 0 3.887C126.633 67.496 105.873 104 64 104zM8.707 63.994C13.465 71.205 32.146 96 64 96c31.955 0 50.553-24.775 55.293-31.994C114.535 56.795 95.854 32 64 32 32.045 32 13.447 56.775 8.707 63.994zM64 88c-13.234 0-24-10.766-24-24s10.766-24 24-24 24 10.766 24 24-10.766 24-24 24zm0-40c-8.822 0-16 7.178-16 16s7.178 16 16 16 16-7.178 16-16-7.178-16-16-16z" data-original="#000000"></path>
                                 </svg>
@@ -53,12 +60,13 @@
                               </div>
                             </div>
                             <div class="mt-12">
-                              <button type="button" class="w-full shadow-xl py-2.5 px-4 text-sm font-semibold rounded text-white bg-black focus:outline-none">
+                              <button type="submit" name="btns" class="w-full shadow-xl py-2.5 px-4 text-sm font-semibold rounded text-white bg-black focus:outline-none">
                                         Se connecter
                               </button>
                             </div>
                           
                           </form>
+                          
                         </div>
                         <div class="md:h-full max-md:mt-10 bg-gray-50 rounded-xl lg:p-12 p-8">
                           <img src="https://readymadeui.com/signin-image.webp" class="w-full h-full object-contain" alt="login-image" />
