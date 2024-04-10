@@ -6,14 +6,22 @@ from django.contrib.auth import login
 from . EmailBackEnd import EmailBackEnd
 from django.http import HttpResponse
 from django.contrib.auth.decorators import user_passes_test
+from django.contrib.sessions.models import Session
+
 
 def home(request):
     return render(request,"main/home.html")
 
 def uerslist(request):
     users = User.objects.all()
+    user_approved=User.objects.filter(is_active=True)
+    user_inapproved=User.objects.filter(is_active=False)
+    print(user_approved)
     context = {
         'users' : users,
+        'user_approved':user_approved,
+        'user_inapproved':user_inapproved,
+
     }
     return render(request,"adm/userslist.html",context)
 
@@ -82,11 +90,15 @@ def adm_dash(request):
     user_active=User.objects.filter(is_active=True).count()
     user_inactive=User.objects.filter(is_active=False).count()
     pourcent=(user_active-user_inactive)/100
+
     
+
 
     context={
         'user_active':user_active,
         'user_inactive':user_inactive,
         'pourcent':pourcent,
+        
+
     }
     return render(request,"adm/dash.html",context)

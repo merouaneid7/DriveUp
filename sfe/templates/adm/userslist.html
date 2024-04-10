@@ -5,42 +5,59 @@
 </head>
 {% block content %}
 
-<div class="container my-40">
-    <div class="flex justify-center">
-        <div class="w-full">
-            
 
-            
-
-            <table class="w-full mt-4 table-auto  rounded-lg">
-                <thead>
-                    <tr>
-                        <th class="px-4 py-2">User Id</th>
-                        <th class="px-4 py-2">Name</th>
-                        <th class="px-4 py-2">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for user in users %}
-                    <tr>
-                        <td class="border px-4 py-2">{{ user.id }}</td>
-                        <td class="border px-4 py-2">{{ user.username }}</td>
-                        
-                        
-                        <td class="border px-4 py-2">
-                            
-                            <a href="{% url 'approve_user' user_id=user.id %} " class="inline-block px-3 py-1 text-sm leading-normal bg-green-500 text-black rounded-lg hover:bg-green-600">Add to Group</a>
-                            <a href="{% url 'delete_user' user_id=user.id %}" class="inline-block px-3 py-1 text-sm leading-normal bg-red-500 text-black rounded-lg hover:bg-red-600">Delete</a>
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
+<div class="py-10">
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 bg-gray-50">
+        <thead class="text-xs text-gray-700 uppercase ">
+            <tr>
                 
-            </table>
-            <a href="" class="block w-full max-w-xs mx-auto mt-4 px-4 py-2 text-center bg-blue-500 text-white rounded-lg hover:bg-blue-600">Create New Formateur</a>
+                <th scope="col" class="px-6 py-3">
+                    Nom d'utiliusateur
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    email
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Status
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Actions
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users  %}
+                
+            
+            <tr class="bg-white border-b ">
+                <td class="px-6 py-4">
+                    <p>{{user.username}}</p>
+                </td>
+                <td class="px-6 py-4">
+                    <p>{{user.email}}</p>
+                </td>
+                
+                
+               
+                    
+                <td class="px-6 py-4">
+                    <div class="flex items-center">
+                        
+                        {% if user.is_active is True %}
+                        <div class="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div> Actif
+                        {% else %}
+                        <div class="h-2.5 w-2.5 rounded-full bg-red-500 me-2"></div> Inactif
+                        {% endif %}
+                    </div>
+                </td>
+                <td class="px-6 py-4">
+                    <!-- Modal toggle -->
+                    <a href="{% url 'approve_user' %} user_id=user.id" type="button" data-modal-target="editUserModal" data-modal-show="editUserModal" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit user</a>
+                    <a href="{% url 'approve_user' %} user_id=user.id" type="button" data-modal-target="editUserModal" data-modal-show="editUserModal" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit user</a>
+                    <a href="{% url 'approve_user' %} user_id=user.id" type="button" data-modal-target="editUserModal" data-modal-show="editUserModal" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit user</a>
+                </td>
+                {% endfor %}
+            </tr>
+            
         </div>
-        
-    </div>
-</div>
-
 {% endblock %}
