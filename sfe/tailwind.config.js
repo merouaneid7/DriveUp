@@ -23,4 +23,12 @@ module.exports = {
           // require('@tailwindcss/forms'),
             require('preline/plugin'),
         ],
+        plugins: [
+          require('flowbite/plugin')({
+              charts: true,
+          }),
+          // ... other plugins
+        ]
       }
+
+      

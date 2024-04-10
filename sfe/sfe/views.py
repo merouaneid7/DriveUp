@@ -5,6 +5,7 @@ from django.contrib import messages
 from django.contrib.auth import login
 from . EmailBackEnd import EmailBackEnd
 from django.http import HttpResponse
+from django.contrib.auth.decorators import user_passes_test
 
 def home(request):
     return render(request,"main/home.html")
@@ -72,3 +73,20 @@ def signup(request):
         user.save()
         return redirect('login')
     return render(request,'auth/signup.html')
+
+def superuser_required(user):
+    return user.is_superuser
+
+@user_passes_test(superuser_required)
+def adm_dash(request):
+    user_active=User.objects.filter(is_active=True).count()
+    user_inactive=User.objects.filter(is_active=False).count()
+    pourcent=(user_active-user_inactive)/100
+    
+
+    context={
+        'user_active':user_active,
+        'user_inactive':user_inactive,
+        'pourcent':pourcent,
+    }
+    return render(request,"adm/dash.html",context)
