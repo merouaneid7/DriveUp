@@ -2,17 +2,17 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.models import User
 from django.contrib import messages
-from django.contrib.auth import login
+from django.contrib.auth import login,logout
 from . EmailBackEnd import EmailBackEnd
-from django.http import HttpResponse
 from django.contrib.auth.decorators import user_passes_test
-from django.contrib.sessions.models import Session
+from django.core.mail import send_mail
+from django.conf import settings
 
 
 def home(request):
     return render(request,"main/home.html")
 
-def uerslist(request):
+def userslist(request):
     users = User.objects.all()
     user_approved=User.objects.filter(is_active=True)
     user_inapproved=User.objects.filter(is_active=False)
@@ -30,12 +30,18 @@ def approve_user(request,user_id):
     user = User.objects.get(pk=user_id)
     user.is_active=True
     user.save()
-    return HttpResponse("DONE")
+    return redirect(userslist)
+
+def inapprove_user(request,user_id):
+    user = User.objects.get(pk=user_id)
+    user.is_active=False
+    user.save()
+    return redirect(userslist)
     
 def delete_user(request,user_id):
     user= User.objects.get(pk=user_id)
     user.delete()
-    return redirect(uerslist)
+    return redirect(userslist)
 
 
 
@@ -57,7 +63,9 @@ def user_login(request):
     return render(request, 'auth/login.html')
 
 
-
+def logout_view(request):
+    logout(request)
+    return redirect('home')
 
 def signup(request):
     if request.method == "POST":
@@ -79,6 +87,14 @@ def signup(request):
         user = User.objects.create_user(username=username,email=email,password=password)
         user.is_active=False
         user.save()
+        send_mail(
+
+                "Bienvenue sur IKKIS AE !", 
+                f"Bienvenue {last_name} ! Amusez-vous bien et n'hésitez pas à nous contacter si vous avez besoin d'aide. 🚀",
+                "ikkisauto@gmail.com",
+                [email],
+                fail_silently=False,
+                )
         return redirect('login')
     return render(request,'auth/signup.html')
 
@@ -89,7 +105,7 @@ def superuser_required(user):
 def adm_dash(request):
     user_active=User.objects.filter(is_active=True).count()
     user_inactive=User.objects.filter(is_active=False).count()
-    pourcent=(user_active-user_inactive)/100
+    pourcent=(user_active)/(user_active + user_inactive)
 
     
 
