@@ -30,17 +30,20 @@ def approve_user(request,user_id):
     user = User.objects.get(pk=user_id)
     user.is_active=True
     user.save()
+    messages.success(request,"Le Compte d'utilisateur " f"{user.username} est activé")
     return redirect(userslist)
 
 def inapprove_user(request,user_id):
     user = User.objects.get(pk=user_id)
     user.is_active=False
     user.save()
+    messages.error(request,"Le Compte d'utilisateur " f"{user.username} est inactivé" )
     return redirect(userslist)
     
 def delete_user(request,user_id):
     user= User.objects.get(pk=user_id)
     user.delete()
+    messages.error(request,"Le Compte d'utilisateur " f"{user.username} est supprimé" )
     return redirect(userslist)
 
 
@@ -97,6 +100,32 @@ def signup(request):
                 )
         return redirect('login')
     return render(request,'auth/signup.html')
+
+def add_user(request):
+    if request.method == "POST":
+        username = request.POST.get('username')
+        first_name=request.POST.get('first_name')
+        last_name=request.POST.get('last_name')
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+
+        if User.objects.filter(email=email).exists():
+           
+           messages.error(request,"Ce e-mail existe déjà ")
+           return redirect('userlist')
+
+        if User.objects.filter(username=username).exists():
+           messages.error(request,"Le nom d'utilisateur existe déjà ")
+           return redirect('userlist')
+        
+        user = User.objects.create_user(username=username,email=email,password=password)
+        user.is_active=False
+        user.save()
+        messages.success(request,"Utilisaeur ajoute")
+        
+        return redirect('userlist')
+    return render(request,'auth/userlist.html')
+
 
 def superuser_required(user):
     return user.is_superuser

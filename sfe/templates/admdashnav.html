@@ -1,0 +1,57 @@
+
+{% load static tailwind_tags %}
+<head>
+    {% tailwind_css %}
+    
+</head>
+<nav class="fixed top-0 z-50 w-full bg-white border-b border-gray-200 ">
+          <div class="px-3 py-3 lg:px-5 lg:pl-3">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center justify-start rtl:justify-end pl-2">
+                 <a href="{% url 'dashboard' %}" class="flex items-center space-x-3 rtl:space-x-reverse">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="w-4 ml-1 text-black"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg>
+
+                    
+                </a>
+              </div>
+              <div class="flex items-center">
+                  <div class="flex items-center ms-3">
+                    <div>
+                      <button type="button" class="flex text-sm   rounded-full " aria-expanded="false" data-dropdown-toggle="dropdown-user">
+                        <span class="sr-only text-black">Open user menu</span>
+                        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10.9998 9.52197C13.5436 9.52197 15.6061 7.52822 15.6061 5.05322C15.6061 2.57822 13.5436 0.584473 10.9998 0.584473C8.45605 0.584473 6.39355 2.57822 6.39355 5.05322C6.39355 7.52822 8.45605 9.52197 10.9998 9.52197ZM10.9998 2.16572C12.6842 2.16572 14.0592 3.47197 14.0592 5.0876C14.0592 6.70322 12.6842 8.00947 10.9998 8.00947C9.31543 8.00947 7.94043 6.70322 7.94043 5.0876C7.94043 3.47197 9.31543 2.16572 10.9998 2.16572Z" fill="currentColor"></path><path d="M13.2342 11.0688H8.76543C5.0873 11.0688 2.09668 14.0938 2.09668 17.772V20.6251C2.09668 21.0376 2.44043 21.4157 2.8873 21.4157C3.33418 21.4157 3.67793 21.072 3.67793 20.6251V17.772C3.67793 14.9532 5.98105 12.6157 8.83418 12.6157H13.2686C16.0873 12.6157 18.4248 14.9188 18.4248 17.772V20.6251C18.4248 21.0376 18.7686 21.4157 19.2154 21.4157C19.6623 21.4157 20.0061 21.072 20.0061 20.6251V17.772C19.9029 14.0938 16.9123 11.0688 13.2342 11.0688Z" fill="currentColor"></path></svg>
+                        
+                      </button>
+                    </div>
+                    <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600" id="dropdown-user">
+                      <div class="px-4 py-3" role="none">
+                        <p class="text-sm text-gray-900 dark:text-white" role="none">
+                          {{user.username}}
+                        </p>
+                        <p class="text-sm font-medium text-gray-900 truncate dark:text-gray-300" role="none">
+                          {{user.email}}
+                        </p>
+                      </div>
+                      <ul class="py-1" role="none">
+                        <li>
+                          <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Dashboard</a>
+                        </li>
+                        <li>
+                          <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Settings</a>
+                        </li>
+                        <li>
+                          <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Earnings</a>
+                        </li>
+                        <li>
+                          <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Sign out</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+            </div>
+          </div>
+        </nav>
+{% block content %}
+       
+{% endblock content %}

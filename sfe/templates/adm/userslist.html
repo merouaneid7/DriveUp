@@ -1,59 +1,99 @@
-
-{% load static tailwind_tags %}
+{% extends 'admdashnav.html' %}
 <head>
-    {% tailwind_css %}
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
 </head>
 {% block content %}
 
-<nav class="fixed top-0 z-50 w-full bg-white border-b border-gray-200 ">
-    <div class="px-3 py-3 lg:px-5 lg:pl-3">
-      <div class="flex items-center justify-between">
-        <div class="flex items-center justify-start rtl:justify-end pl-2">
-           <a href="/" class="flex items-center space-x-3 rtl:space-x-reverse">
-            <span class="block antialiased font-sans leading-relaxed text-blue-gray-900 text-lg font-bold">IKKIS AE</span>
-              
-          </a>
-        </div>
-        <div class="flex items-center">
-            <div class="flex items-center ms-3">
-              <div>
-                <button type="button" class="flex text-sm   rounded-full " aria-expanded="false" data-dropdown-toggle="dropdown-user">
-                  <span class="sr-only text-black">Open user menu</span>
-                  <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10.9998 9.52197C13.5436 9.52197 15.6061 7.52822 15.6061 5.05322C15.6061 2.57822 13.5436 0.584473 10.9998 0.584473C8.45605 0.584473 6.39355 2.57822 6.39355 5.05322C6.39355 7.52822 8.45605 9.52197 10.9998 9.52197ZM10.9998 2.16572C12.6842 2.16572 14.0592 3.47197 14.0592 5.0876C14.0592 6.70322 12.6842 8.00947 10.9998 8.00947C9.31543 8.00947 7.94043 6.70322 7.94043 5.0876C7.94043 3.47197 9.31543 2.16572 10.9998 2.16572Z" fill="currentColor"></path><path d="M13.2342 11.0688H8.76543C5.0873 11.0688 2.09668 14.0938 2.09668 17.772V20.6251C2.09668 21.0376 2.44043 21.4157 2.8873 21.4157C3.33418 21.4157 3.67793 21.072 3.67793 20.6251V17.772C3.67793 14.9532 5.98105 12.6157 8.83418 12.6157H13.2686C16.0873 12.6157 18.4248 14.9188 18.4248 17.772V20.6251C18.4248 21.0376 18.7686 21.4157 19.2154 21.4157C19.6623 21.4157 20.0061 21.072 20.0061 20.6251V17.772C19.9029 14.0938 16.9123 11.0688 13.2342 11.0688Z" fill="currentColor"></path></svg>
-                  
-                </button>
-              </div>
-              <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600" id="dropdown-user">
-                <div class="px-4 py-3" role="none">
-                  <p class="text-sm text-gray-900 dark:text-white" role="none">
-                    {{user.username}}
-                  </p>
-                  <p class="text-sm font-medium text-gray-900 truncate dark:text-gray-300" role="none">
-                    {{user.email}}
-                  </p>
-                </div>
-                <ul class="py-1" role="none">
-                  <li>
-                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Dashboard</a>
-                  </li>
-                  <li>
-                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Settings</a>
-                  </li>
-                  <li>
-                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Earnings</a>
-                  </li>
-                  <li>
-                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Sign out</a>
-                  </li>
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-16 px-4">
+    {% include "msg/msg.html" %}
+    <div class="flex items-center justify-between flex-column flex-wrap md:flex-row space-y-4 md:space-y-0 pb-4 bg-white ">
+        <div>
+            <button id="dropdownActionButton" data-dropdown-toggle="dropdownAction" class="inline-flex items-center font-sans font-bold text-center  transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg  text-white  bg-black" type="button">
+                <span class="sr-only">filtre</span>
+                Filter Par
+                <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+                </svg>
+            </button>
+            <!-- Dropdown menu -->
+            <div id="dropdownAction" class=" hidden bg-gray-50 divide-y divide-gray-100 rounded-lg shadow w-44 px-4  ">
+                <ul class="py-1 text-sm text-gray-700 " aria-labelledby="dropdownActionButton">
+                    <li>
+                        <a href="#" class="block px-4 py-2 hover:bg-gray-100  text-gray-900">Dernier ajoute</a>
+                    </li>
+                    <li>
+                        <a href="#" class="block px-4 py-2 hover:bg-gray-100  text-gray-900">Active</a>
+                    </li>
+                    <li>
+                        <a href="#" class="block px-4 py-2 hover:bg-gray-100  text-gray-900">inactive</a>
+                    </li>
                 </ul>
-              </div>
+                
             </div>
+        </div>
+        
+        <button id="dropdownActionButton"  class="inline-flex items-center text-gray-500 bg-white  focus:outline-none   font-medium rounded-lg text-sm px-3 py-1.5 " type="button">
+            <div class="flex items-center justify-center gap-x-6">
+                <a href="#"  data-modal-target="crud-modal" data-modal-toggle="crud-modal" class="align-middle select-none font-sans font-bold text-center  transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg  text-white  bg-black">Get started</a>
+                
+            </div>
+        </button>
+    </div>
+
+
+
+
+
+  
+  <!-- Main modal -->
+  <div id="crud-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+      <div class="relative p-4 w-full max-w-md max-h-full">
+          <!-- Modal content -->
+          <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+              <!-- Modal header -->
+              <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                  <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+                      Create New Product
+                  </h3>
+                  <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center  dark:hover:text-white" data-modal-toggle="crud-modal">
+                      <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                      </svg>
+                      <span class="sr-only">Close modal</span>
+                  </button>
+              </div>
+              <!-- Modal body -->
+              <form class="p-4 md:p-5" method="POST" action="add_user">
+                
+                {% csrf_token %}
+                  <div class="grid gap-4 mb-4 grid-cols-2">
+                      <div class="col-span-2">
+                          <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">username</label>
+                          <input type="text" name="username" id="username" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Type product name" required="">
+                      </div>
+                      <div class="col-span-2 sm:col-span-1">
+                          <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">email</label>
+                          <input type="email" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="$2999" required="">
+                      </div>
+                      <div class="col-span-2 sm:col-span-1">
+                          <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">password</label>
+                          <input type="password" id="password" name="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="$2999" required="">
+                      </div>
+                      
+                  </div>
+                  <button type="submit" class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                      <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
+                      Add new product
+                  </button>
+              </form>
           </div>
       </div>
-    </div>
-  </nav>
-<div class="py-16">
+  </div> 
+  
+    
+
+    
+<div class="py-4">
     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 bg-gray-50">
         <thead class="text-xs text-gray-700 uppercase ">
             <tr>
@@ -99,9 +139,9 @@
                 </td>
                 <td class="px-6 py-4">
                     <!-- Modal toggle -->
-                    <a href="{% url 'approve_user' user_id=user.id %}" type="button" data-modal-target="editUserModal" data-modal-show="editUserModal" class="mr-2 font-medium text-green-500  hover:underline">Activer</a>
-                    <a href="{% url 'inapprove_user' user_id=user.id %}" type="button" data-modal-target="editUserModal" data-modal-show="editUserModal" class="mr-2 font-medium text-red-500  hover:underline">Inactiver</a>
-                    <a href="{% url 'delete_user' user_id=user.id %}" type="button" data-modal-target="editUserModal" data-modal-show="editUserModal" class="mr-2 font-medium text-blue-500  hover:underline">Supprimer</a>
+                    <a href="{% url 'approve_user' user_id=user.id %}" type="button"  class="mr-2 font-medium text-green-500  hover:underline">Activer</a>
+                    <a href="{% url 'inapprove_user' user_id=user.id %}" type="button"  class="mr-2 font-medium text-red-500  hover:underline">Inactiver</a>
+                    <a href="{% url 'delete_user' user_id=user.id %}" type="button"  class="mr-2 font-medium text-blue-500  hover:underline">Supprimer</a>
                     
                 </td>
                 {% endfor %}
@@ -109,6 +149,6 @@
             
         </div>
         <script src="../path/to/flowbite/dist/flowbite.min.js"></script>
-       <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-       <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>         
 {% endblock %}
