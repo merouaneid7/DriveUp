@@ -28,13 +28,30 @@ def userslist(request):
 
 def approve_user(request,user_id):
     user = User.objects.get(pk=user_id)
+    email=user.email
+    send_mail(
+        "Votre compte IKKIS AE est active",
+        "Bonjour " f"{user.username}" " , vous pouvez accéder à la plateforme IKKIS AE maintenat .",
+        "ikkisauto@gmail.com",
+        [email],
+        fail_silently=False,
+    )
     user.is_active=True
     user.save()
+    
     messages.success(request,"Le Compte d'utilisateur " f"{user.username} est activé")
     return redirect(userslist)
 
 def inapprove_user(request,user_id):
     user = User.objects.get(pk=user_id)
+    email=user.email
+    send_mail(
+        "Votre compte IKKIS AE est inactive",
+        "Bonjour " f"{user.username}" " , vous ne pouvez pas accéder à la plateforme IKKIS AE .",
+        "ikkisauto@gmail.com",
+        [email],
+        fail_silently=False,
+    )
     user.is_active=False
     user.save()
     messages.error(request,"Le Compte d'utilisateur " f"{user.username} est inactivé" )
@@ -42,6 +59,14 @@ def inapprove_user(request,user_id):
     
 def delete_user(request,user_id):
     user= User.objects.get(pk=user_id)
+    email=user.email
+    send_mail(
+        "Vous pouvez plus acceder IKKIS AE",
+        "Bonjour " f"{user.username}" " malheureusement, vous pouvez plus accéder à la plateforme IKKIS AE, si vous pensez que c'est un problème pour contacter votre agence.",
+        "ikkisauto@gmail.com",
+        [email],
+        fail_silently=False,
+    )
     user.delete()
     messages.error(request,"Le Compte d'utilisateur " f"{user.username} est supprimé" )
     return redirect(userslist)
@@ -121,7 +146,7 @@ def add_user(request):
         user = User.objects.create_user(username=username,email=email,password=password)
         user.is_active=False
         user.save()
-        messages.success(request,"Utilisaeur ajoute")
+        messages.success(request,"Vous avez ajoutee l'utilisateur " f"{user.username}")
         
         return redirect('userlist')
     return render(request,'auth/userlist.html')
