@@ -83,7 +83,10 @@ def user_login(request):
         print(user)
         if user is not None and user.is_active is True:
             login(request, user)
-            return redirect('home')  
+            if user.is_superuser:
+                return redirect('dashboard') 
+            else:
+                return redirect('home')
         elif user is None:
             messages.error(request, 'Email ou mot de passe invalide')
         else:

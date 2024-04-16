@@ -20,6 +20,13 @@ module.exports = {
             'node_modules/preline/dist/*.js',
         ],
         plugins: [
+          require("@tailwindcss/typography"),
+          require("@tailwindcss/forms"),
+          require("@tailwindcss/line-clamp"),
+          require("tailwind-children"),
+          require("tailwind-saasblocks"),
+        ],
+        plugins: [
           // require('@tailwindcss/forms'),
             require('preline/plugin'),
         ],
@@ -27,8 +34,19 @@ module.exports = {
           require('flowbite/plugin')({
               charts: true,
           }),
+        
           // ... other plugins
-        ]
+        ],
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ["Inter", ...defaultTheme.fontFamily.sans],
+            },
+          },
+        },
       }
 
-      
+const eggshellDelightsTheme = require("tailwind-saasblocks/themes/eggshell-delights.theme");
+const midnightEnvyTheme = require("tailwind-saasblocks/themes/midnight-envy.theme");
+
+/** @type {import('tailwindcss').Config} */
