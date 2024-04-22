@@ -7,6 +7,8 @@ from . EmailBackEnd import EmailBackEnd
 from django.contrib.auth.decorators import user_passes_test
 from django.core.mail import send_mail
 from django.conf import settings
+from django.template.loader import render_to_string
+from django.http import HttpResponseForbidden, JsonResponse
 
 
 def home(request):
@@ -175,3 +177,54 @@ def adm_dash(request):
 
     }
     return render(request,"adm/dash.html",context)
+
+
+def active_users(request):
+    users=User.objects.filter(is_active=True)
+    context={
+        'users':users,
+    }
+    return render(request,"adm/userslist.html",context)
+
+
+def inactive_users(request):
+    users=User.objects.filter(is_active=False)
+    context={
+        'users':users,
+    }
+    return render(request,"adm/userslist.html",context)
+    
+   
+def last_added(request):
+    users=User.objects.order_by('-id')
+    context={
+        'users':users,
+    }
+    return render(request,"adm/userslist.html",context)
+    
+def only_admin(request):
+    users=User.objects.filter(is_superuser=True)
+    context={
+        'users':users,
+    }
+    return render(request,"adm/userslist.html",context)
+
+def only_client(request):
+    users=User.objects.filter(is_superuser=False)
+    context={
+        'users':users,
+    }
+    return render(request,"adm/userslist.html",context)
+    
+   
+def search_user(request):
+    search_input=request.GET.get("search_input")
+    print("search_input")
+
+    users=User.objects.filter(username=search_input) | User.objects.filter(email=search_input)
+    context={
+        'users':users,
+    }
+    return render(request,"adm/userslist.html",context)
+    
+   

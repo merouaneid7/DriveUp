@@ -14,5 +14,13 @@ urlpatterns = [
     path('inapprove_user/<int:user_id>',views.inapprove_user,name="inapprove_user"),
     path('delete_user/<int:user_id>',views.delete_user,name="delete_user"),
     path('dashboard',views.adm_dash,name="dashboard"),
-    path('logout',views.logout_view,name="logout")
+    path('logout',views.logout_view,name="logout"),
+    path('active_users',views.active_users,name="active_users"),
+    path('inactive_users',views.inactive_users,name="inactive_users"),
+    path('last_added',views.last_added,name="last_added"),
+    path('only_admin',views.only_admin,name="only_admin"),
+    path('only_client',views.only_client,name="only_client"),
+    path('search_user',views.search_user,name="search_user"),
+    
+    
 ]

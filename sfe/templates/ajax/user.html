@@ -1,0 +1,44 @@
+{% for user in users  %}
+                
+            
+<tr class="bg-white border-b ">
+    <td class="px-6 py-4">
+        <p class="text-gray-900 font-bold">{{user.username}}</p>
+    </td>
+    <td class="px-6 py-4">
+        <p class="text-gray-900">{{user.email}}</p>
+    </td>
+    
+    
+   
+        
+    <td class="px-6 py-4">
+        <div class="flex items-center">
+            
+            {% if user.is_active is True  %}
+            <div class="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div> Actif
+            {% else %}
+            <div class="h-2.5 w-2.5 rounded-full bg-red-500 me-2"></div> Inactif
+            {% endif %}
+        </div>
+    </td>
+    <td class="px-6 py-4">
+        <div class="flex items-center">
+            
+            {% if user.is_superuser is True  %}
+            <div class="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div> admin
+            {% else %}
+            <div class="h-2.5 w-2.5 rounded-full bg-red-500 me-2"></div> client
+            {% endif %}
+        </div>
+    </td>
+    <td class="px-6 py-4">
+        <!-- Modal toggle -->
+        <a href="{% url 'approve_user' user_id=user.id %}" type="button"  class="mr-2 font-medium text-green-500  hover:underline">Activer</a>
+        <a href="{% url 'inapprove_user' user_id=user.id %}" type="button"  class="mr-2 font-medium text-red-500  hover:underline">Inactiver</a>
+        <a href="{% url 'delete_user' user_id=user.id %}" type="button"  class="mr-2 font-medium text-blue-500  hover:underline">Supprimer</a>
+        
+    </td>
+    {% endfor %}
+   
+</tr>
