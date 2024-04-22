@@ -7,15 +7,19 @@ from . EmailBackEnd import EmailBackEnd
 from django.contrib.auth.decorators import user_passes_test
 from django.core.mail import send_mail
 from django.conf import settings
-from django.template.loader import render_to_string
-from django.http import HttpResponseForbidden, JsonResponse
+from django.core.paginator import Paginator
 
 
 def home(request):
     return render(request,"main/home.html")
 
 def userslist(request):
-    users = User.objects.all()
+    users=User.objects.all()
+    paginator=Paginator(users, 2)
+    page_num=request.GET.get('page')
+    page=paginator.page(page_num)
+
+    
     user_approved=User.objects.filter(is_active=True)
     user_inapproved=User.objects.filter(is_active=False)
     print(user_approved)
@@ -23,6 +27,7 @@ def userslist(request):
         'users' : users,
         'user_approved':user_approved,
         'user_inapproved':user_inapproved,
+        'page':page
 
     }
     return render(request,"adm/userslist.html",context)
@@ -181,6 +186,8 @@ def adm_dash(request):
 
 def active_users(request):
     users=User.objects.filter(is_active=True)
+    if not users.exists():
+        messages.error(request,"aucun utilisateur est active")
     context={
         'users':users,
     }
@@ -189,6 +196,8 @@ def active_users(request):
 
 def inactive_users(request):
     users=User.objects.filter(is_active=False)
+    if not users.exists():
+        messages.error(request,"aucun utilisateur est inactive")
     context={
         'users':users,
     }
@@ -197,6 +206,8 @@ def inactive_users(request):
    
 def last_added(request):
     users=User.objects.order_by('-id')
+    if not users.exists():
+        messages.error(request,"y'aucun utilisateur ")
     context={
         'users':users,
     }
@@ -204,6 +215,8 @@ def last_added(request):
     
 def only_admin(request):
     users=User.objects.filter(is_superuser=True)
+    if not users.exists():
+        messages.error(request,"aucun utilisateur est admin")
     context={
         'users':users,
     }
@@ -211,6 +224,8 @@ def only_admin(request):
 
 def only_client(request):
     users=User.objects.filter(is_superuser=False)
+    if not users.exists():
+        messages.error(request,"aucun utilisateur est client")
     context={
         'users':users,
     }
@@ -219,9 +234,13 @@ def only_client(request):
    
 def search_user(request):
     search_input=request.GET.get("search_input")
-    print("search_input")
 
     users=User.objects.filter(username=search_input) | User.objects.filter(email=search_input)
+    print(users)
+
+    if not users.exists():
+        messages.error(request,"Aucun utilisateur avec   ' " f"{search_input} ' comme nom d'utilisateur ou bien email")
+
     context={
         'users':users,
     }
