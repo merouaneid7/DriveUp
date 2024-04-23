@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import user_passes_test
 from django.core.mail import send_mail
 from django.conf import settings
 from django.core.paginator import Paginator
+from app.models import *
 
 
 def home(request):
@@ -112,6 +113,7 @@ def signup(request):
         last_name=request.POST.get('last_name')
         email = request.POST.get('email')
         password = request.POST.get('password')
+        profile_img=request.POST.get('profile_img')
 
         if User.objects.filter(email=email).exists():
            
@@ -125,6 +127,10 @@ def signup(request):
         user = User.objects.create_user(username=username,email=email,password=password)
         user.is_active=False
         user.save()
+
+        otherfields=User_otherfields.objects.create(user=user,profile_image=profile_img)
+        otherfields.save()
+
         send_mail(
 
                 "Bienvenue sur IKKIS AE !", 
