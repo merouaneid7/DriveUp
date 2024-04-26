@@ -14,42 +14,59 @@ from app.models import *
 def home(request):
     return render(request,"main/home.html")
 
+def superuser_required(user):
+    return user.is_superuser
+
+@user_passes_test(superuser_required)
 def userslist(request):
     users=User.objects.all()
-    paginator=Paginator(users, 2)
-    page_num=request.GET.get('page')
-    page=paginator.page(page_num)
+    user_otherfields=User_otherfields.objects.all()
+   
 
     
     user_approved=User.objects.filter(is_active=True)
     user_inapproved=User.objects.filter(is_active=False)
     print(user_approved)
+    print(user_otherfields)
     context = {
+
         'users' : users,
+        'user_otherfields':user_otherfields,
         'user_approved':user_approved,
         'user_inapproved':user_inapproved,
-        'page':page
+        
+        
 
     }
     return render(request,"adm/userslist.html",context)
 
+def superuser_required(user):
+    return user.is_superuser
 
+@user_passes_test(superuser_required)
 def approve_user(request,user_id):
     user = User.objects.get(pk=user_id)
-    email=user.email
-    send_mail(
-        "Votre compte IKKIS AE est active",
-        "Bonjour " f"{user.username}" " , vous pouvez accéder à la plateforme IKKIS AE maintenat .",
-        "ikkisauto@gmail.com",
-        [email],
-        fail_silently=False,
+    if user.is_active is True:
+        messages.warning(request,"Ce compte est deja activé")
+    else:
+        email=user.email
+        send_mail(
+            "Votre compte IKKIS AE est active",
+            "Bonjour " f"{user.username}" " , vous pouvez accéder à la plateforme IKKIS AE maintenat .",
+            "ikkisauto@gmail.com",
+            [email],
+            fail_silently=False,
     )
-    user.is_active=True
-    user.save()
-    
-    messages.success(request,"Le Compte d'utilisateur " f"{user.username} est activé")
+        user.is_active=True
+        user.save()
+        messages.success(request,"Le Compte d'utilisateur " f"{user.username} est activé")
+
     return redirect(userslist)
 
+def superuser_required(user):
+    return user.is_superuser
+
+@user_passes_test(superuser_required)
 def inapprove_user(request,user_id):
     user = User.objects.get(pk=user_id)
     email=user.email
@@ -64,7 +81,12 @@ def inapprove_user(request,user_id):
     user.save()
     messages.error(request,"Le Compte d'utilisateur " f"{user.username} est inactivé" )
     return redirect(userslist)
-    
+
+
+def superuser_required(user):
+    return user.is_superuser
+
+@user_passes_test(superuser_required)
 def delete_user(request,user_id):
     user= User.objects.get(pk=user_id)
     email=user.email
@@ -113,7 +135,9 @@ def signup(request):
         last_name=request.POST.get('last_name')
         email = request.POST.get('email')
         password = request.POST.get('password')
+        confirm_password=request.POST.get('confirm_password')
         profile_img=request.POST.get('profile_img')
+        cni=request.POST.get('cni')
 
         if User.objects.filter(email=email).exists():
            
@@ -124,15 +148,18 @@ def signup(request):
            messages.error(request,"Le nom d'utilisateur existe déjà ")
            return redirect('signup')
         
-        user = User.objects.create_user(username=username,email=email,password=password)
+        if confirm_password != password:
+            messages.error(request,"Les mots de passe ne correspondent pas!")
+            return redirect('signup')
+        
+        user = User.objects.create_user(username=username,email=email,password=password,last_name=last_name,first_name=first_name)
         user.is_active=False
         user.save()
 
-        otherfields=User_otherfields.objects.create(user=user,profile_image=profile_img)
+        otherfields=User_otherfields.objects.create(user=user,profile_image=profile_img,cni=cni)
         otherfields.save()
 
         send_mail(
-
                 "Bienvenue sur IKKIS AE !", 
                 f"Bienvenue {last_name} ! Amusez-vous bien et n'hésitez pas à nous contacter si vous avez besoin d'aide. 🚀",
                 "ikkisauto@gmail.com",
@@ -142,6 +169,11 @@ def signup(request):
         return redirect('login')
     return render(request,'auth/signup.html')
 
+
+def superuser_required(user):
+    return user.is_superuser
+
+@user_passes_test(superuser_required)
 def add_user(request):
     if request.method == "POST":
         username = request.POST.get('username')
@@ -149,6 +181,9 @@ def add_user(request):
         last_name=request.POST.get('last_name')
         email = request.POST.get('email')
         password = request.POST.get('password')
+        confirm_password=request.POST.get('confirm_password')
+        profile_img=request.POST.get('profile_img')
+        cni=request.POST.get('cni')
 
         if User.objects.filter(email=email).exists():
            
@@ -159,13 +194,27 @@ def add_user(request):
            messages.error(request,"Le nom d'utilisateur existe déjà ")
            return redirect('userlist')
         
-        user = User.objects.create_user(username=username,email=email,password=password)
+        if confirm_password != password:
+            messages.error(request,"Les mots de passe ne correspondent pas")
+            return redirect('userlist')
+        
+        user = User.objects.create_user(username=username,email=email,password=password,last_name=last_name,first_name=first_name)
         user.is_active=False
         user.save()
-        messages.success(request,"Vous avez ajoutee l'utilisateur " f"{user.username}")
-        
+
+        otherfields=User_otherfields.objects.create(user=user,profile_image=profile_img,cni=cni)
+        otherfields.save()
+
+        send_mail(
+                "Bienvenue sur IKKIS AE !", 
+                f"Bienvenue {last_name} ! Amusez-vous bien et n'hésitez pas à nous contacter si vous avez besoin d'aide. 🚀",
+                "ikkisauto@gmail.com",
+                [email],
+                fail_silently=False,
+                )
         return redirect('userlist')
-    return render(request,'auth/userlist.html')
+    messages.success(request,"Vous avez ajoutee l'utilisateur " f"{user.username}")
+    return render(request,'adm/userlist.html')
 
 
 def superuser_required(user):
@@ -241,7 +290,7 @@ def only_client(request):
 def search_user(request):
     search_input=request.GET.get("search_input")
 
-    users=User.objects.filter(username=search_input) | User.objects.filter(email=search_input)
+    users=User.objects.filter(first_name=search_input) | User.objects.filter(last_name=search_input)  | User.objects.filter(email=search_input)
     print(users)
 
     if not users.exists():
