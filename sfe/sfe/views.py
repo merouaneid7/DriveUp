@@ -219,8 +219,8 @@ def add_user(request):
                 fail_silently=False,
                 )
         return redirect('userlist')
-    messages.success(request,"Vous avez ajoutee l'utilisateur " f"{user.username}")
-    return render(request,'adm/userlist.html')
+    messages.success(request,"Vous avez ajoutee l'utilisateur")
+    return render(request,'adm/userslist.html')
 
 
 def superuser_required(user):
