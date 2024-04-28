@@ -20,14 +20,15 @@ def superuser_required(user):
 @user_passes_test(superuser_required)
 def userslist(request):
     users = User.objects.all()
+    user_otherfields=User_otherfields.objects.all()
     paginator = Paginator(users, 5) 
     page_number = request.GET.get('page')
-
+    
     
     page_obj = paginator.get_page(page_number)
     
     if page_obj is EmptyPage:
-        messages.error("slm")
+        
         render("userslist")
 
     user_approved = User.objects.filter(is_active=True)
@@ -37,6 +38,7 @@ def userslist(request):
         'page_obj': page_obj,  
         'user_approved': user_approved,
         'user_inapproved': user_inapproved,
+        'user_otherfields':user_otherfields,
     }
     return render(request, "adm/userslist.html", context)
 
@@ -71,16 +73,19 @@ def superuser_required(user):
 def inapprove_user(request,user_id):
     user = User.objects.get(pk=user_id)
     email=user.email
-    send_mail(
-        "Votre compte IKKIS AE est inactive",
-        "Bonjour " f"{user.username}" " , vous ne pouvez pas accéder à la plateforme IKKIS AE .",
-        "ikkisauto@gmail.com",
-        [email],
-        fail_silently=False,
-    )
-    user.is_active=False
-    user.save()
-    messages.error(request,"Le Compte d'utilisateur " f"{user.username} est inactivé" )
+    if user.is_active is False:
+        messages.warning(request,"Ce compte est deja inactivé")
+    else:
+        send_mail(
+            "Votre compte IKKIS AE est inactive",
+            "Bonjour " f"{user.username}" " , vous ne pouvez pas accéder à la plateforme IKKIS AE .",
+            "ikkisauto@gmail.com",
+            [email],
+            fail_silently=False,
+        )
+        user.is_active=False
+        user.save()
+        messages.error(request,"Le Compte d'utilisateur " f"{user.username} est inactivé" )
     return redirect(userslist)
 
 
@@ -249,7 +254,7 @@ def active_users(request):
     page_obj = paginator.get_page(page_number)
     
     if page_obj is EmptyPage:
-        messages.error("slm")
+        
         render("userslist")
 
     user_approved = User.objects.filter(is_active=True)
@@ -272,7 +277,7 @@ def inactive_users(request):
     page_obj = paginator.get_page(page_number)
     
     if page_obj is EmptyPage:
-        messages.error("slm")
+        
         render("userslist")
 
     user_approved = User.objects.filter(is_active=True)
@@ -295,7 +300,7 @@ def last_added(request):
     page_obj = paginator.get_page(page_number)
     
     if page_obj is EmptyPage:
-        messages.error("slm")
+        
         render("userslist")
 
     user_approved = User.objects.filter(is_active=True)
@@ -317,7 +322,7 @@ def only_admin(request):
     page_obj = paginator.get_page(page_number)
     
     if page_obj is EmptyPage:
-        messages.error("slm")
+        
         render("userslist")
 
     user_approved = User.objects.filter(is_active=True)
@@ -339,7 +344,7 @@ def only_client(request):
     page_obj = paginator.get_page(page_number)
     
     if page_obj is EmptyPage:
-        messages.error("slm")
+        
         render("userslist")
 
     user_approved = User.objects.filter(is_active=True)
@@ -362,7 +367,7 @@ def search_user(request):
         messages.error(request,"Aucun utilisateur avec   ' " f"{search_input} ' comme nom d'utilisateur ou bien email")
 
     context={
-        'users':users,
+        'page_obj':users,
     }
     return render(request,"adm/userslist.html",context)
     
