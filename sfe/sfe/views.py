@@ -7,7 +7,7 @@ from . EmailBackEnd import EmailBackEnd
 from django.contrib.auth.decorators import user_passes_test
 from django.core.mail import send_mail
 from django.conf import settings
-from django.core.paginator import Paginator
+from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
 from app.models import *
 
 
@@ -19,26 +19,27 @@ def superuser_required(user):
 
 @user_passes_test(superuser_required)
 def userslist(request):
-    users=User.objects.all()
-    user_otherfields=User_otherfields.objects.all()
-   
+    users = User.objects.all()
+    paginator = Paginator(users, 5) 
+    page_number = request.GET.get('page')
 
     
-    user_approved=User.objects.filter(is_active=True)
-    user_inapproved=User.objects.filter(is_active=False)
-    print(user_approved)
-    print(user_otherfields)
+    page_obj = paginator.get_page(page_number)
+    
+    if page_obj is EmptyPage:
+        messages.error("slm")
+        render("userslist")
+
+    user_approved = User.objects.filter(is_active=True)
+    user_inapproved = User.objects.filter(is_active=False)
     context = {
-
-        'users' : users,
-        'user_otherfields':user_otherfields,
-        'user_approved':user_approved,
-        'user_inapproved':user_inapproved,
-        
-        
-
+        'users':users,
+        'page_obj': page_obj,  
+        'user_approved': user_approved,
+        'user_inapproved': user_inapproved,
     }
-    return render(request,"adm/userslist.html",context)
+    return render(request, "adm/userslist.html", context)
+
 
 def superuser_required(user):
     return user.is_superuser
@@ -240,58 +241,122 @@ def adm_dash(request):
 
 
 def active_users(request):
-    users=User.objects.filter(is_active=True)
-    if not users.exists():
-        messages.error(request,"aucun utilisateur est active")
-    context={
+    users = User.objects.filter(is_active=True)
+    paginator = Paginator(users, 5) 
+    page_number = request.GET.get('page')
+
+    
+    page_obj = paginator.get_page(page_number)
+    
+    if page_obj is EmptyPage:
+        messages.error("slm")
+        render("userslist")
+
+    user_approved = User.objects.filter(is_active=True)
+    user_inapproved = User.objects.filter(is_active=False)
+    context = {
         'users':users,
+        'page_obj': page_obj,  
+        'user_approved': user_approved,
+        'user_inapproved': user_inapproved,
     }
-    return render(request,"adm/userslist.html",context)
+    return render(request, "adm/userslist.html", context)
 
 
 def inactive_users(request):
-    users=User.objects.filter(is_active=False)
-    if not users.exists():
-        messages.error(request,"aucun utilisateur est inactive")
-    context={
+    users = User.objects.filter(is_active=False)
+    paginator = Paginator(users, 5) 
+    page_number = request.GET.get('page')
+
+    
+    page_obj = paginator.get_page(page_number)
+    
+    if page_obj is EmptyPage:
+        messages.error("slm")
+        render("userslist")
+
+    user_approved = User.objects.filter(is_active=True)
+    user_inapproved = User.objects.filter(is_active=False)
+    context = {
         'users':users,
+        'page_obj': page_obj,  
+        'user_approved': user_approved,
+        'user_inapproved': user_inapproved,
     }
-    return render(request,"adm/userslist.html",context)
+    return render(request, "adm/userslist.html", context)
     
    
 def last_added(request):
-    users=User.objects.order_by('-id')
-    if not users.exists():
-        messages.error(request,"y'aucun utilisateur ")
-    context={
+    users = User.objects.all().order_by('-id')
+    paginator = Paginator(users, 5) 
+    page_number = request.GET.get('page')
+
+    
+    page_obj = paginator.get_page(page_number)
+    
+    if page_obj is EmptyPage:
+        messages.error("slm")
+        render("userslist")
+
+    user_approved = User.objects.filter(is_active=True)
+    user_inapproved = User.objects.filter(is_active=False)
+    context = {
         'users':users,
+        'page_obj': page_obj,  
+        'user_approved': user_approved,
+        'user_inapproved': user_inapproved,
     }
-    return render(request,"adm/userslist.html",context)
+    return render(request, "adm/userslist.html", context)
     
 def only_admin(request):
-    users=User.objects.filter(is_superuser=True)
-    if not users.exists():
-        messages.error(request,"aucun utilisateur est admin")
-    context={
+    users = User.objects.filter(is_superuser=True)
+    paginator = Paginator(users, 5) 
+    page_number = request.GET.get('page')
+
+    
+    page_obj = paginator.get_page(page_number)
+    
+    if page_obj is EmptyPage:
+        messages.error("slm")
+        render("userslist")
+
+    user_approved = User.objects.filter(is_active=True)
+    user_inapproved = User.objects.filter(is_active=False)
+    context = {
         'users':users,
+        'page_obj': page_obj,  
+        'user_approved': user_approved,
+        'user_inapproved': user_inapproved,
     }
-    return render(request,"adm/userslist.html",context)
+    return render(request, "adm/userslist.html", context)
 
 def only_client(request):
-    users=User.objects.filter(is_superuser=False)
-    if not users.exists():
-        messages.error(request,"aucun utilisateur est client")
-    context={
+    users = User.objects.filter(is_superuser=False)
+    paginator = Paginator(users, 5) 
+    page_number = request.GET.get('page')
+
+    
+    page_obj = paginator.get_page(page_number)
+    
+    if page_obj is EmptyPage:
+        messages.error("slm")
+        render("userslist")
+
+    user_approved = User.objects.filter(is_active=True)
+    user_inapproved = User.objects.filter(is_active=False)
+    context = {
         'users':users,
+        'page_obj': page_obj,  
+        'user_approved': user_approved,
+        'user_inapproved': user_inapproved,
     }
-    return render(request,"adm/userslist.html",context)
+    return render(request, "adm/userslist.html", context)
     
    
 def search_user(request):
     search_input=request.GET.get("search_input")
 
     users=User.objects.filter(first_name=search_input) | User.objects.filter(last_name=search_input)  | User.objects.filter(email=search_input)
-    print(users)
 
     if not users.exists():
         messages.error(request,"Aucun utilisateur avec   ' " f"{search_input} ' comme nom d'utilisateur ou bien email")
