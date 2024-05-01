@@ -218,8 +218,10 @@ def add_user(request):
                 [email],
                 fail_silently=False,
                 )
+        messages.success(request,"Vous avez ajoutee l'utilisateur " f"{user.username} ")
         return redirect('userlist')
-    messages.success(request,"Vous avez ajoutee l'utilisateur")
+    
+    
     return render(request,'adm/userslist.html')
 
 
@@ -371,4 +373,29 @@ def search_user(request):
     }
     return render(request,"adm/userslist.html",context)
     
-   
+
+
+def Edit_user(request,user_id):
+    if request.method == "POST":
+        username = request.POST.get('username')
+        first_name=request.POST.get('first_name')
+        last_name=request.POST.get('last_name')
+        email = request.POST.get('email')
+        profile_img=request.POST.get('profile_img')
+        cni=request.POST.get('cni')
+
+    user=User.objects.filter(id=user_id).update(username=username,first_name=first_name,last_name=last_name,email=email)
+    user.save()
+    user_otherfields=User_otherfields.objects.filter(id=user_id).update(user=user,profile_image=profile_img,cni=cni)
+    user_otherfields.save()
+
+    return render(request,"adm/userslist.html")
+
+    
+def Profile(request,user_id):
+    user=User.objects.get(pk=user_id)
+    context={
+        'user':user,
+        'user_id':user_id,
+    }
+    return render(request,"main/profile.html",context) 

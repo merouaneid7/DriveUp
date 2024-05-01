@@ -21,6 +21,7 @@ urlpatterns = [
     path('only_admin',views.only_admin,name="only_admin"),
     path('only_client',views.only_client,name="only_client"),
     path('search_user',views.search_user,name="search_user"),
-    
+    path('edit_user/<int:user_id>',views.Edit_user,name="Edit_user"),
+    path('dashboard/profile/<int:user_id>',views.Profile,name="profile"),
     
 ]
