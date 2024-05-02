@@ -109,7 +109,7 @@
                             <td class="flex items-center p-4 mr-12 space-x-6 whitespace-nowrap">
                                 <img class="w-10 h-10 rounded-full" src="{{user.user_otherfields.profile_image.url}}" alt="{{ user.username }}">
                                 <div class="text-sm font-normal text-gray-500 ">
-                                    <div class="text-base font-semibold text-gray-900 "><button > {{user.last_name}} {{user.first_name}} </button></div>
+                                    <div class="text-base font-semibold text-gray-900 "><button > <a href="{% url 'profile' user_id=user.id %}"> {{user.last_name}} {{user.first_name}} </a></button></div>
                                 </div>
                             </td>
                             
@@ -134,7 +134,7 @@
                                 
                             
                                                 
-                            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap ">{{user.email}}</td>
+                            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap ">{{user.email}}//{{user.password}}</td>
                             
                             <td class="p-4 space-x-2 whitespace-nowrap">
                                 <button type="button" data-modal-target="edit-user-modal-{{user.id}}" data-modal-toggle="edit-user-modal-{{user.id}}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-black rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 ">

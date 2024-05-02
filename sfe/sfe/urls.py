@@ -23,5 +23,5 @@ urlpatterns = [
     path('search_user',views.search_user,name="search_user"),
     path('edit_user/<int:user_id>',views.Edit_user,name="Edit_user"),
     path('dashboard/profile/<int:user_id>',views.Profile,name="profile"),
-    
+    path('dashboard/profile/edit_img/<int:user_id>',views.Edit_profileimg,name="edit_profileimg"),
 ]

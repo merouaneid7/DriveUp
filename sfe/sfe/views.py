@@ -9,6 +9,7 @@ from django.core.mail import send_mail
 from django.conf import settings
 from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
 from app.models import *
+from django.contrib.auth.hashers import make_password
 
 
 def home(request):
@@ -362,9 +363,7 @@ def only_client(request):
    
 def search_user(request):
     search_input=request.GET.get("search_input")
-
     users=User.objects.filter(first_name=search_input) | User.objects.filter(last_name=search_input)  | User.objects.filter(email=search_input)
-
     if not users.exists():
         messages.error(request,"Aucun utilisateur avec   ' " f"{search_input} ' comme nom d'utilisateur ou bien email")
 
@@ -377,17 +376,16 @@ def search_user(request):
 
 def Edit_user(request,user_id):
     if request.method == "POST":
-        username = request.POST.get('username')
         first_name=request.POST.get('first_name')
         last_name=request.POST.get('last_name')
-        email = request.POST.get('email')
-        profile_img=request.POST.get('profile_img')
         cni=request.POST.get('cni')
+        password=request.POST.get('password')
+        hashed_password = make_password(password)
 
-    user=User.objects.filter(id=user_id).update(username=username,first_name=first_name,last_name=last_name,email=email)
-    user.save()
-    user_otherfields=User_otherfields.objects.filter(id=user_id).update(user=user,profile_image=profile_img,cni=cni)
-    user_otherfields.save()
+    User.objects.filter(id=user_id).update(first_name=first_name, last_name=last_name,password=hashed_password)
+
+
+    
 
     return render(request,"adm/userslist.html")
 
@@ -399,3 +397,14 @@ def Profile(request,user_id):
         'user_id':user_id,
     }
     return render(request,"main/profile.html",context) 
+
+def Edit_profileimg(request,user_id):
+    if request.method == 'POST':
+        profile_img=request.POST.get('profile_img')
+
+    user=User.objects.get(pk=user_id)
+    print(user)
+
+    return render(request,"main/profile.html")
+
+    
