@@ -12,6 +12,7 @@ from app.models import *
 from django.contrib.auth.hashers import make_password
 
 
+
 def home(request):
     return render(request,"main/home.html")
 
@@ -380,15 +381,21 @@ def Edit_user(request,user_id):
         last_name=request.POST.get('last_name')
         cni=request.POST.get('cni')
         password=request.POST.get('password')
+        c_password=request.POST.get('c_password')
+        
+    if not all(request.POST.get(field) for field in request.POST.keys()):
+        messages.warning(request,"non complet")
+
+    elif password != c_password:
+        messages.error(request,"mot de passe non valide")
+    else:
         hashed_password = make_password(password)
+        user=User.objects.filter(id=user_id).update(first_name=first_name, last_name=last_name,password=hashed_password)
+        User_otherfields.objects.filter(user=user_id).update(cni=cni)
+        messages.success(request,"profile modifie avec succes")
+    return redirect(reverse('profile', args=[user_id]))
 
-    User.objects.filter(id=user_id).update(first_name=first_name, last_name=last_name,password=hashed_password)
-
-
-    
-
-    return render(request,"adm/userslist.html")
-
+from django.urls import reverse
     
 def Profile(request,user_id):
     user=User.objects.get(pk=user_id)
@@ -397,6 +404,37 @@ def Profile(request,user_id):
         'user_id':user_id,
     }
     return render(request,"main/profile.html",context) 
+
+
+def Edit_userbyadmin(request,user_id):
+    if request.method == "POST":
+        first_name=request.POST.get('first_name')
+        last_name=request.POST.get('last_name')
+        cni=request.POST.get('cni')
+        password=request.POST.get('password')
+        c_password=request.POST.get('c_password')
+        
+    if not all(request.POST.get(field) for field in request.POST.keys()):
+        messages.warning(request,"non complet")
+
+    elif password != c_password:
+        messages.error(request,"mot de passe non valide")
+    else:
+        hashed_password = make_password(password)
+        user=User.objects.filter(id=user_id).update(first_name=first_name, last_name=last_name,password=hashed_password)
+        User_otherfields.objects.filter(user=user_id).update(cni=cni)
+        messages.success(request,"profile modifie avec succes")
+    return redirect('userlist')
+
+from django.urls import reverse
+    
+def Profile(request,user_id):
+    user=User.objects.get(pk=user_id)
+    context={
+        'user':user,
+        'user_id':user_id,
+    }
+    return render(request,"main/profile.html",context)
 
 def Edit_profileimg(request,user_id):
     if request.method == 'POST':

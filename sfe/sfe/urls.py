@@ -22,6 +22,7 @@ urlpatterns = [
     path('only_client',views.only_client,name="only_client"),
     path('search_user',views.search_user,name="search_user"),
     path('edit_user/<int:user_id>',views.Edit_user,name="Edit_user"),
+    path('edit_userbyadmin/<int:user_id>',views.Edit_userbyadmin,name="Edit_userbyadmin"),
     path('dashboard/profile/<int:user_id>',views.Profile,name="profile"),
     path('dashboard/profile/edit_img/<int:user_id>',views.Edit_profileimg,name="edit_profileimg"),
 ]
