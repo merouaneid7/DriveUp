@@ -1,3 +1,15 @@
+
+// tailwind.config.js
+module.exports = {
+  content: [
+    // './src/**/*.{html,js}',
+      'node_modules/preline/dist/*.js',
+  ],
+  plugins: [
+    // require('@tailwindcss/forms'),
+      require('preline/plugin'),
+  ],
+}
 module.exports = {
 
           plugins: [
@@ -50,3 +62,9 @@ const eggshellDelightsTheme = require("tailwind-saasblocks/themes/eggshell-delig
 const midnightEnvyTheme = require("tailwind-saasblocks/themes/midnight-envy.theme");
 
 /** @type {import('tailwindcss').Config} */
+
+// tailwind.config.js
+module.exports = {
+  darkMode: 'class',
+  // ...
+}

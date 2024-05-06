@@ -25,4 +25,8 @@ urlpatterns = [
     path('edit_userbyadmin/<int:user_id>',views.Edit_userbyadmin,name="Edit_userbyadmin"),
     path('dashboard/profile/<int:user_id>',views.Profile,name="profile"),
     path('dashboard/profile/edit_img/<int:user_id>',views.Edit_profileimg,name="edit_profileimg"),
+    path('my_dashboard',views.user_dash,name="my_dash"),
+    path('my_dashboard/inbox',views.inbox,name="inbox"),
+    path('my_dashboard/welcome',views.welcome,name="my_dash/welcome"),
+   
 ]

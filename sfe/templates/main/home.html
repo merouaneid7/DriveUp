@@ -1,207 +1,72 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block content %}
-<div class="relative" x-data="{ state: false }">
-  <div
-    class="absolute inset-0 blur-xl h-[580px]"
-    style="
-      background: linear-gradient(
-  140deg,
-  rgba(255, 255, 0, 0) 25%, 
-  rgba(255, 255, 0, 0.26) 50.92%, 
-  rgba(255, 255, 0, 0) 80.35% 
-);
-    "
-  ></div>
 
 
-<section class="pb-20 ">
-      <div class="  py-0 mx-auto max-w-7xl sm:px-6 md:px-12 lg:px-24 lg:py-24 relative  overflow before:absolute before:top-0 before:start-1/2 before:bg-[url('https://preline.co/assets/svg/examples/polygon-bg-element.svg')] before:bg-no-repeat before:bg-top before:bg-cover before:size-full before:-z-[1] before:transform before:-translate-x-1/2 ">
-        <div class="flex flex-wrap items-center mx-auto max-w-8xl">
-          <div class="w-full lg:max-w-lg lg:w-1/2 rounded-xl">
-            <div>
-              <div class="relative w-full max-w-lg">
-                <div ></div>
-    
-                <div class="absolute rounded-full  -bottom-24 right-20 w-72 h-72 mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
-                <div class="relative">
-                  <img class="object-cover object-center mx-auto rounded-lg " alt="hero" src="{% static 'testimg.png' %}">
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="flex flex-col items-start mt-12 mb-16 text-left lg:flex-grow lg:w-1/2 lg:pl-6 xl:pl-24 md:mb-0 xl:mt-0">
-            
-            <h1 class="mb-8 mt-14 text-4xl font-bold leading-none tracking-tighter text-neutral-600 md:text-7xl lg:text-6xl">IKKIS AE,l'Art de Conduire avec Confiance</h1>
-            <p class="mb-8 text-base leading-relaxed text-left text-gray-500">La plateforme IKKIS AE fournit d’une part, des supports pédagogiques et des vidéos didactiques conçus par la NARSA et destinés à la formation à la conduite, et d’autre part, des QUIZ à la fin de chaque thème de formation.</p>
-            <div class="flex items-center justify-center gap-x-6">
-                  <a href="#" class="py-3 align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs  px-6 rounded-lg bg-gray-900 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none">Get started</a>
-                  <a href="#" class="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-1 px-6 rounded-lg text-gray-900 hover:bg-gray-900/10 active:bg-gray-900/20">Learn more <span aria-hidden="true">→</span></a>
-            </div>
-            <div class="pt-8" ><h3>Approuvé par</h3></div>
-            <div class="flex flex-wrap w-full -mx-4 text-left">
-                  
-              <div class=" p-4  sm:">
-                <img src="{% static 'ma.png' %}" class="w-16">
-              </div>
-              <div class=" p-4  sm:">
-                  <img src="{% static 'narsa.png' %}" class="w-20">
-              </div>
-              <div class=" p-4  sm:">
-                <img src="{% static 'narsa.png' %}" class="w-20">
-              </div>
-              
-            </div>
-          </div>
+  {% block content %}
+<div class="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 py-8">
+  <div class="grid lg:grid-cols-7 lg:gap-x-8 xl:gap-x-12 lg:items-center">
+    <div class="lg:col-span-3">
+      <h1 class="block text-3xl font-bold text-gray-800 sm:text-4xl md:text-5xl lg:text-6xl dark:text-white">l'Art de Conduire avec Confiances</h1>
+      <p class="mt-3 text-lg text-gray-800 dark:text-neutral-400">Introducing a new way for your brand to reach the creative community.</p>
+
+      <div class="mt-5 lg:mt-8 flex flex-col items-center gap-2 sm:flex-row sm:gap-3">
+       
+        <a class="w-full sm:w-auto py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-yellow-300 text-white hover:bg-purple-600 disabled:opacity-50 disabled:pointer-events-none" href="#">
+          Request demo
+        </a>
+        <a class="w-full sm:w-auto  px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent  text-purple-600   hover:bg-gray-50 py-3.5  disabled:opacity-50 disabled:pointer-events-none" href="#">
+          Request demo
+        </a>
+      </div>
+
+      
+      <div class="mt-6 lg:mt-12">
+        <span class="text-xs font-medium text-gray-800 uppercase dark:text-neutral-200">Trusted by:</span>
+
+        <div class="mt-4 flex gap-x-8">
+          <img src="{% static 'ma.png' %}" class="w-16 h-16">
+          <img src="{% static 'narsa.png' %}" class="w-16 h-16">
+          <img src="{% static 'narsa.png' %}" class="w-16 h-16">
         </div>
-      </div>
-    </section>
-    
-<h1 class="mb-8 text-center  text-2xl font-extrabold leading-none tracking-tight text-gray-900 md:text-4xl lg:text-4xl dark:text-white">We invest in the world’s potential</h1>  
-
-{% for i in '123'  %}
-<div class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow  inline-block justify-center ml-20 mr-4 my-4">
-  <a href="#">
-      <img class="p-8 rounded-t-lg" src="{% static 'apple-watch.png' %}" alt="product image" />
-  </a>
-  <div class="px-5 pb-5">
-      <a href="#">
-          <h5 class="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">Apple Watch Series 7 GPS, Aluminium Case, Starlight Sport</h5>
-      </a>
-      <div class="flex items-center mt-2.5 mb-5">
-          <div class="flex items-center space-x-1 rtl:space-x-reverse">
-              <svg class="w-4 h-4 text-yellow-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-                  <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
-              </svg>
-              <svg class="w-4 h-4 text-yellow-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-                  <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
-              </svg>
-              <svg class="w-4 h-4 text-yellow-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-                  <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
-              </svg>
-              <svg class="w-4 h-4 text-yellow-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-                  <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
-              </svg>
-              <svg class="w-4 h-4 text-gray-200 dark:text-gray-600" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-                  <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
-              </svg>
-          </div>
-          <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ms-3">5.0</span>
-      </div>
-      <div class="flex items-center justify-between">
-          <span class="text-3xl font-bold text-gray-900 dark:text-white">$599</span>
-          <a href="#" class="py-3 align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs  px-6 rounded-lg  text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none bg-gray-900">Add to cart</a>
-      </div>
-  </div>
-</div>
-
-
-
-
-
-
-{% endfor %}
-
-<section
-  x-data="{ features: [{ icon: `<svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='currentColor' class='w-6 h-6'><path stroke-linecap='round' stroke-linejoin='round' d='M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z'/></svg>`, title: 'Analytics', desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec congue, nisl eget molestie varius, enim ex faucibus purus.' }, { icon: `<svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='currentColor' class='w-6 h-6'><path stroke-linecap='round' stroke-linejoin='round' d='M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z'/></svg>`, title: 'Datacenter security', desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec congue, nisl eget molestie varius, enim ex faucibus purus.' }] }"
->
-  <div
-    class=" max-w-screen-xl mx-auto px-4 gap-16 justify-between md:px-8 lg:flex pt-40"
-  >
-    <div>
-      <div class="max-w-xl space-y-3 ">
-        <h3 class="text-indigo-600 font-semibold  ">Features</h3>
-        <h1 class=" text-2xl font-extrabold leading-none tracking-tight text-gray-900 md:text-4xl lg:text-4xl dark:text-white">We invest in the world’s potential</h1>  
-          
-
-<div class="relative overflow-x-auto shadow-md sm:rounded-lg ">
-  <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-      <thead class="text-xs text-gray-700 uppercase dark:text-gray-400">
-          <tr>
-              <th scope="col" class="px-12 py-1 bg-gray-50 dark:bg-gray-800">
-                 
-              </th>
-              <th scope="col" class="px-8 ml-2 py-1">
-                  Nous
-              </th>
-              
-              <th scope="col" class="px-8 py-1">
-                  Autre Plateforme
-              </th>
-          </tr>
-      </thead>
-      <tbody>
-          <tr class="border-b border-gray-200 dark:border-gray-700">
-              <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
-                  Simple a utliser
-              </th>
-              <td class="px-6 py-4">
-                
-                <svg xmlns="http://www.w3.org/2000/svg" class="ml-4 w-4 h-4" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#2ed600" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"/></svg>
-              
-              </td>
-              
-              <td class="px-6 py-4">
-                <svg xmlns="http://www.w3.org/2000/svg" class="ml-4 w-4 h-4" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#ff0000" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z"/></svg>
-              
-              </td>
-          </tr>
-          <tr class="border-b border-gray-200 dark:border-gray-700">
-              <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
-                Accès mobile
-              </th>
-              <td class="px-6 py-4">
-                <svg xmlns="http://www.w3.org/2000/svg" class="ml-4 w-4 h-4" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#2ed600" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"/></svg>
-              
-              </td>
-              
-              <td class="px-6 py-4">
-                <svg xmlns="http://www.w3.org/2000/svg" class="ml-4 w-4 h-4" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#ff0000" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z"/></svg>
-              
-              </td>
-          </tr>
-          <tr class="border-b border-gray-200 dark:border-gray-700">
-              <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
-                  tres chaire
-              </th>
-              <td class="px-6 py-4">
-                <svg xmlns="http://www.w3.org/2000/svg" class="ml-4 w-4 h-4" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#ff0000" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z"/></svg>
-              
-              </td>
-            
-              <td class="px-6 py-4">
-                <svg xmlns="http://www.w3.org/2000/svg" class="ml-4 w-4 h-4" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#2ed600" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"/></svg>
-              
-              </td>
-          </tr>
-          <tr class="border-b border-gray-200 dark:border-gray-700">
-              <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
-                  Google Pixel Phone
-              </th>
-              <td class="px-6 py-4">
-                  Gray
-              </td>
-              
-              <td class="px-6 py-4">
-                  $799
-              </td>
-          </tr>
-
-      </tbody>
-  </table>
-</div>
-
-        
       </div>
       
     </div>
-    <div class="mt-12 lg:mt-0">
-      <img
-        src="https://raw.githubusercontent.com/sidiDev/remote-assets/main/Safari%20(Big%20Sur)%20-%20Light.png"
-        class="w-full shadow-lg rounded-lg border"
-      />
+    
+
+    <div class="lg:col-span-4 mt-10 lg:mt-0">
+      <img class="w-full rounded-xl" src="https://images.unsplash.com/photo-1665686376173-ada7a0031a85?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=900&h=700&q=80" alt="Image Description">
+    </div>
+   
+  </div>
+  
+</div>
+<!--fin section hero-->
+
+<div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+  <div class="max-w-2xl mx-auto text-center mb-10 lg:mb-14">
+    <h2 class="text-2xl font-bold md:text-4xl md:leading-tight">Find the right plan for your team</h2>
+    <p class="mt-1 text-gray-600">Pay as you go service, cancel anytime.</p>
+  </div>
+  <div class="relative  mt-12">
+    <div class="grid gap-px sm:grid-cols-1  lg:grid-cols-3  lg:items-center">
+      {% for i  in  '123' %}
+      <div class="flex flex-col h-full text-center px-3 py-4">
+        <div class="flex flex-col bg-white border shadow-sm rounded-xl">
+          <img class="w-full h-auto rounded-t-xl" src="https://images.unsplash.com/photo-1680868543815-b8666dba60f7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2532&q=80" alt="Image Description">
+          <div class="p-4 md:p-5">
+            <h3 class="text-lg font-bold text-gray-800">
+              Card title
+            </h3>
+            <p class="mt-1 text-gray-500">
+              Some quick example text to build on the card title and make up the bulk of the card's content.
+            </p>
+            <a class="mt-2 py-2 px-3 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none" href="#">
+              Go somewhere
+            </a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
     </div>
   </div>
-</section>
-
 {% endblock content %}

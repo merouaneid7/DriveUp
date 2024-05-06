@@ -10,11 +10,16 @@ from django.conf import settings
 from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
 from app.models import *
 from django.contrib.auth.hashers import make_password
+import stripe
 
 
 
 def home(request):
-    return render(request,"main/home.html")
+    course=Course.objects.all()
+    context={
+        'course':course,
+    }
+    return render(request,"main/home.html",context)
 
 def superuser_required(user):
     return user.is_superuser
@@ -445,4 +450,12 @@ def Edit_profileimg(request,user_id):
 
     return render(request,"main/profile.html")
 
-    
+
+def user_dash(request):
+    return render(request,"user/my_dash.html")
+
+def welcome(request):
+    return render(request,"user/welcome.html")
+
+def inbox(request):
+    return render(request,"user/inbox.html")
