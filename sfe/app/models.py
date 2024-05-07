@@ -52,4 +52,4 @@ class Appointement(models.Model):
     numero_telephone=models.IntegerField(null=True)
     email=models.EmailField(max_length=20,null=True)
     message=models.CharField(max_length=40,null=True)
-    date=models.DateField(null=True)
+    date=models.TextField(null=True)

@@ -28,18 +28,30 @@ def make_appoint(request):
     if request.method == 'POST':
         nom=request.POST.get('last_name')
         prenom=request.POST.get('first_name')
-        email=request.POST.get('nom')
+        email=request.POST.get('email')
         cni=request.POST.get('cni')
         phone_number=request.POST.get('phone_number')
         msg=request.POST.get('msg')
-
-
     
     appointement=Appointement.objects.create(nom=nom,prenom=prenom,cni=cni,numero_telephone=phone_number,email=email,message=msg)
     appointement.save()
     messages.success(request,"la demande est envoyer avec succes")
     return redirect('/#appointement')
 
+
+
+def approve_appoint(request,app_id):
+    user_email=Appointement.objects.get(pk=app_id)
+    if request.method == 'POST':
+        date=request.POST.get('date')
+        print(date)
+    appointement=Appointement.objects.filter(id=app_id)
+    appointement.update(date=date)
+    messages.success(request,"Rendez vous accepte pour le " f"{date}")
+    
+    
+    
+    return redirect("appointement")
 
 def superuser_required(user):
     return user.is_superuser

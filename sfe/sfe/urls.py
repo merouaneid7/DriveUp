@@ -30,6 +30,7 @@ urlpatterns = [
     path('my_dashboard/welcome',views.welcome,name="my_dash/welcome"),
     path('make_appoint',views.make_appoint,name="make_appoint"),
     path('dashboard/appointement',views.appointement,name="appointement"),
+    path('dashboard/appointement/approuve/<int:app_id>',views.approve_appoint,name="approve_appoint")
    
     
    
