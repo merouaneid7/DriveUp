@@ -3,8 +3,8 @@
 
 
   {% block content %}
-  <div class="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 py-8 relative">
-    <div class="bg-gradient-to-br from-purple-100 via-yellow-50 blur-lg absolute top-0 left-0 right-0 bottom-0"></div>
+  <div class="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 py-8 relative z-10">
+    <div class="bg-gradient-to-br from-purple-200 via-yellow-50 blur-lg absolute top-0 left-0 right-0 bottom-0"></div>
   
     <div class="grid lg:grid-cols-7 lg:gap-x-8 xl:gap-x-12 lg:items-center relative">
       <div class="lg:col-span-3 z-10 relative">
@@ -96,7 +96,7 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6">
               <div>
                 <label for="Numero de telephone" class="block mb-2 text-sm text-gray-700 font-medium d">Numero de telephone</label>
-                <input type="text"  oninput="this.value = this.value.replace(/[^0-9]/g, '')" name="Numero de telephone" id="phone_number"  class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none ">
+                <input type="text"  oninput="this.value = this.value.replace(/[^1-9]/g, '')" name="Numero de telephone" id="phone_number"  class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none ">
               </div>
               <div>
                 <label for="cni" class="block mb-2 text-sm text-gray-700 font-medium d">Cni</label>
@@ -111,7 +111,7 @@
             </div>
             <div>
               <label for="email" class="block mb-2 text-sm text-gray-700 font-medium w-full">Message</label>
-              <input type="text" name="msg" id="msg" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none ">
+              <input type="text" name="msg" id="msg" class="py-10 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none ">
             </div>
             
           </div>
@@ -187,7 +187,7 @@
                 Call us
               </p>
               <p>
-                <a class="relative inline-block font-medium text-black before:absolute before:bottom-0.5 before:start-0 before:-z-[1] before:w-full before:h-1 before:bg-purple-500 focus:outline-none focus:before:bg-black" href="mailto:example@site.so">
+                <a class="relative inline-block font-medium text-black before:absolute before:bottom-0.5 before:start-0 before:-z-[1] before:w-full before:h-1 before:bg-purple-500 focus:outline-none focus:before:bg-black" href="tel:0602926076">
                   +44 222 777-000
                 </a>
               </p>

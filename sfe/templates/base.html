@@ -9,7 +9,7 @@
 
 <!-- ========== HEADER ========== -->
 <header class="flex flex-wrap md:justify-start md:flex-nowrap z-50 w-full py-7">
-    <nav class="relative max-w-7xl w-full flex flex-wrap md:grid md:grid-cols-12 basis-full items-center px-4 md:px-8 mx-auto" aria-label="Global">
+    <nav class="relative max-w-7xl w-full flex flex-wrap md:grid md:grid-cols-12 basis-full items-center px-4 md:px-8 mx-auto " aria-label="Global">
       <div class="md:col-span-3">
         <!-- Logo -->
         <a class="flex-none rounded-xl text-xl inline-block font-semibold focus:outline-none focus:opacity-80" href="../templates/creative-agency/index.html" aria-label="Preline">
@@ -18,7 +18,11 @@
         <!-- End Logo -->
       </div>
   
-      <!-- Button Group -->
+     
+     {% if not user.is_authenticated %}
+      
+     
+      
       <div class="flex items-center gap-x-2 ms-auto py-1 md:ps-6 md:order-3 md:col-span-3">
         <button type="button" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-xl border border-gray-200 text-black hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none">
           <a href="#">Se connecter</a>
@@ -34,6 +38,39 @@
           </button>
         </div>
       </div>
+      {% else %}
+      <div class=" flex items-center  ms-auto py-1 md:ps-6 md:order-3 md:col-span-3">
+        
+          <img id="avatarButton" type="button" data-dropdown-toggle="userDropdown" data-dropdown-placement="bottom-start" class="w-10 h-10 rounded-full cursor-pointer" src="{{user.user_otherfields.profile_image.url}}" alt="User dropdown">
+          
+          <div id="userDropdown" class=" hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 absolute z-20 ">
+              <div class="px-4 py-3 text-sm text-gray-900 ">
+                <div>{{user.last_name}} {{user.first_name}}</div>
+                <div class="font-medium truncate">{{user.email}}</div>
+              </div>
+              <ul class="py-2 text-sm text-gray-700 " aria-labelledby="avatarButton">
+                <li>
+                  <a href="{% url 'profile' user_id=user.id %}" class="block px-4 py-2 hover:bg-gray-100 ">Profile</a>
+                </li>
+                
+                {% if user.is_superuser %}
+                <li>
+                  <a href="{% url 'dashboard' %}" class="block px-4 py-2 hover:bg-gray-100 ">Table de bord</a>
+                </li>
+                {% else %}
+                <li>
+                  <a href="{% url 'my_dash' %}" class="block px-4 py-2 hover:bg-gray-100 ">Table de bord</a>
+                </li>
+                {% endif %}
+                
+              </ul>
+              <div class="py-1">
+                <a href="{% url 'logout' %}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 ">Se déconnecter</a>
+              </div>
+          </div>
+
+      </div>
+      {% endif %}
       
   
       
