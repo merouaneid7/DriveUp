@@ -5,6 +5,42 @@
 {% block content %}
 <div class="sm:ml-72">
           {% include "msg/msg.html" %}
+          <div class="sm:flex">
+                    
+                    <div class="relative flex items-center  space-x-2 sm:space-x-3 mx-48 mb-6 ml-3 py-1">
+                        <button  data-modal-target="add-user-modal" data-modal-toggle="add-user-modal" class="bg-gray-900 inline-flex items-center justify-center w-1/2  py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 px-2">
+                            <svg class="w-3.5 h-3.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#ffffff" d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"/></svg>
+                            <p class="px-3">Ajouter&nbsp&nbsp&nbsp&nbsp</p>
+                        </button>
+                        
+                        <button id="dropdownActionButton" data-dropdown-toggle="dropdownAction" class="bg-gray-900 inline-flex items-center justify-center w-1/2  py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 px-2">
+                            <svg class="w-3 h-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#ffffff" d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"/></svg>
+                        <p class="px-3">Filtrer par</p>
+                        </button>
+        
+        
+                        <div class="flex pl-0 mt-3 space-x-1 sm:pl-2 sm:mt-0">
+                           
+                            <div id="dropdownAction" class=" hidden bg-gray-50 divide-y divide-gray-100 rounded-lg shadow w-44 p-6  ">
+                        <ul class="py-1 text-sm text-gray-700 " aria-labelledby="dropdownActionButton">
+                              <li>
+                                        <a href="{% url 'appointement' %}" class="block px-4 py-2 hover:bg-gray-100  text-gray-900">Tous</a>
+                              
+                              </li>
+                            <li>
+                                <a href="{% url 'active_appoint' %}" class="block px-4 py-2 hover:bg-gray-100  text-gray-900">Approves</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'inactive_appoint' %}" class="block px-4 py-2 hover:bg-gray-100  text-gray-900">Innaprouves</a>
+                            </li>
+                            
+                        </ul>
+                        
+                    </div>
+                        </div>
+                        
+                    </div>
+                </div>
 {% for i in new_appointement  %}
 <div class="max-w-xs mx-4 bg-white border border-t-4 border-t-purple-600 shadow-sm rounded-xl inline-block my-4 ">
           <div class="p-4 md:p-5">

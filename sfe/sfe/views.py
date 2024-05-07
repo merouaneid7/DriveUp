@@ -22,7 +22,13 @@ def home(request):
     }
     return render(request,"main/home.html",context)
 
+def appointement(request):
+    new_appointement=Appointement.objects.all()
 
+    context={
+        'new_appointement':new_appointement,
+    }
+    return render(request,"adm/appointement.html",context)
 
 def make_appoint(request):
     if request.method == 'POST':
@@ -46,12 +52,27 @@ def approve_appoint(request,app_id):
         date=request.POST.get('date')
         print(date)
     appointement=Appointement.objects.filter(id=app_id)
-    appointement.update(date=date)
+    appointement.update(date=date,accepted=True)
     messages.success(request,"Rendez vous accepte pour le " f"{date}")
-    
-    
-    
     return redirect("appointement")
+
+def active_appoint(request):
+    new_appointement=Appointement.objects.filter(accepted=True)
+    context={
+        'new_appointement':new_appointement,
+    }
+
+    return render(request,"adm/appointement.html",context)
+
+def inactive_appoint(request):
+    new_appointement=Appointement.objects.filter(accepted=False)
+    context={
+        'new_appointement':new_appointement,
+    }
+
+    return render(request,"adm/appointement.html",context)
+    
+
 
 def superuser_required(user):
     return user.is_superuser
@@ -287,13 +308,7 @@ def welcome_adm(request):
     }
     return render(request,"adm/welcome_admin.html",context)
 
-def appointement(request):
-    new_appointement=Appointement.objects.filter(accepted=False)
 
-    context={
-        'new_appointement':new_appointement,
-    }
-    return render(request,"adm/appointement.html",context)
 
 
 def active_users(request):
