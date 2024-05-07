@@ -44,9 +44,12 @@ class Lesson(models.Model):
 
 
 
-class appointement(models.Model):
+class Appointement(models.Model):
+    accepted=models.BooleanField(default=False)
     nom=models.CharField(max_length=20,null=True)
     prenom=models.CharField(max_length=30,null=True)
     cni=models.CharField(max_length=10,null=True)
-    numero_telephone:nom=models.IntegerField(null=True)
+    numero_telephone=models.IntegerField(null=True)
     email=models.EmailField(max_length=20,null=True)
+    message=models.CharField(max_length=40,null=True)
+    date=models.DateField(null=True)

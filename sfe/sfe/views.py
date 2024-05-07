@@ -7,10 +7,11 @@ from . EmailBackEnd import EmailBackEnd
 from django.contrib.auth.decorators import user_passes_test
 from django.core.mail import send_mail
 from django.conf import settings
-from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
+from django.core.paginator import Paginator,EmptyPage
 from app.models import *
 from django.contrib.auth.hashers import make_password
-import stripe
+from datetime import datetime
+
 
 
 
@@ -20,6 +21,25 @@ def home(request):
         'course':course,
     }
     return render(request,"main/home.html",context)
+
+
+
+def make_appoint(request):
+    if request.method == 'POST':
+        nom=request.POST.get('last_name')
+        prenom=request.POST.get('first_name')
+        email=request.POST.get('nom')
+        cni=request.POST.get('cni')
+        phone_number=request.POST.get('phone_number')
+        msg=request.POST.get('msg')
+
+
+    
+    appointement=Appointement.objects.create(nom=nom,prenom=prenom,cni=cni,numero_telephone=phone_number,email=email,message=msg)
+    appointement.save()
+    messages.success(request,"la demande est envoyer avec succes")
+    return redirect('/#appointement')
+
 
 def superuser_required(user):
     return user.is_superuser
@@ -236,10 +256,11 @@ def superuser_required(user):
     return user.is_superuser
 
 @user_passes_test(superuser_required)
-def adm_dash(request):
+def welcome_adm(request):
     user_active=User.objects.filter(is_active=True).count()
     user_inactive=User.objects.filter(is_active=False).count()
     pourcent=(user_active)/(user_active + user_inactive)
+    new_appointement=Appointement.objects.filter(accepted=False)
 
     
 
@@ -248,10 +269,19 @@ def adm_dash(request):
         'user_active':user_active,
         'user_inactive':user_inactive,
         'pourcent':pourcent,
+        'new_appointement':new_appointement,
         
 
     }
-    return render(request,"adm/dash.html",context)
+    return render(request,"adm/welcome_admin.html",context)
+
+def appointement(request):
+    new_appointement=Appointement.objects.filter(accepted=False)
+
+    context={
+        'new_appointement':new_appointement,
+    }
+    return render(request,"adm/appointement.html",context)
 
 
 def active_users(request):

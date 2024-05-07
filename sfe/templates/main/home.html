@@ -3,43 +3,39 @@
 
 
   {% block content %}
-<div class="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 py-8">
-  <div class="grid lg:grid-cols-7 lg:gap-x-8 xl:gap-x-12 lg:items-center">
-    <div class="lg:col-span-3">
-      <h1 class="block text-3xl font-bold text-gray-800 sm:text-4xl md:text-5xl lg:text-6xl dark:text-white">l'Art de Conduire avec Confiances</h1>
-      <p class="mt-3 text-lg text-gray-800 dark:text-neutral-400">Introducing a new way for your brand to reach the creative community.</p>
-
-      <div class="mt-5 lg:mt-8 flex flex-col items-center gap-2 sm:flex-row sm:gap-3">
-       
-        <a class="w-full sm:w-auto py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-yellow-300 text-white hover:bg-purple-600 disabled:opacity-50 disabled:pointer-events-none" href="#">
-          Request demo
-        </a>
-        <a class="w-full sm:w-auto  px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent  text-purple-600   hover:bg-gray-50 py-3.5  disabled:opacity-50 disabled:pointer-events-none" href="#">
-          Request demo
-        </a>
-      </div>
-
-      
-      <div class="mt-6 lg:mt-12">
-        <span class="text-xs font-medium text-gray-800 uppercase dark:text-neutral-200">Trusted by:</span>
-
-        <div class="mt-4 flex gap-x-8">
-          <img src="{% static 'ma.png' %}" class="w-16 h-16">
-          <img src="{% static 'narsa.png' %}" class="w-16 h-16">
-          <img src="{% static 'narsa.png' %}" class="w-16 h-16">
+  <div class="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 py-8 relative">
+    <div class="bg-gradient-to-br from-purple-100 via-yellow-50 blur-lg absolute top-0 left-0 right-0 bottom-0"></div>
+  
+    <div class="grid lg:grid-cols-7 lg:gap-x-8 xl:gap-x-12 lg:items-center relative">
+      <div class="lg:col-span-3 z-10 relative">
+        <h1 class="block text-3xl font-bold text-gray-800 sm:text-4xl md:text-5xl lg:text-6xl ">l'Art de Conduire avec Confiances</h1>
+        <p class="mt-3 text-lg text-gray-800 dark:text-neutral-400">Introducing a new way for your brand to reach the creative community.</p>
+  
+        <div class="mt-5 lg:mt-8 flex flex-col items-center gap-2 sm:flex-row sm:gap-3">
+          <a class="w-full sm:w-auto py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-2xl transition border border-transparent bg-yellow-300 text-white hover:bg-purple-600 disabled:opacity-50 disabled:pointer-events-none" href="#">
+            Request demo
+          </a>
+          <a class="w-full sm:w-auto  px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent  text-purple-600   hover:bg-gray-50 py-3.5  disabled:opacity-50 disabled:pointer-events-none" href="#">
+            Request demo
+          </a>
+        </div>
+  
+        <div class="mt-6 lg:mt-12">
+          <span class="text-xs font-medium text-gray-800 uppercase ">Trusted by:</span>
+          <div class="mt-4 flex gap-x-8">
+            <img src="{% static 'ma.png' %}" class="w-16 h-16 transition hover:-translate-y-1">
+            <img src="{% static 'narsa.png' %}" class="w-16 h-16 transition hover:-translate-y-1">
+            <img src="{% static 'narsa.png' %}" class="w-16 h-16 transition hover:-translate-y-1">
+          </div>
         </div>
       </div>
-      
+  
+      <div class="lg:col-span-4 mt-10 lg:mt-0 z-20 relative">
+        <img class="w-full rounded-xl" src="https://images.unsplash.com/photo-1665686376173-ada7a0031a85?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=900&h=700&q=80" alt="Image Description">
+      </div>
     </div>
-    
-
-    <div class="lg:col-span-4 mt-10 lg:mt-0">
-      <img class="w-full rounded-xl" src="https://images.unsplash.com/photo-1665686376173-ada7a0031a85?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=900&h=700&q=80" alt="Image Description">
-    </div>
-   
   </div>
   
-</div>
 <!--fin section hero-->
 
 <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
@@ -49,18 +45,18 @@
   </div>
   <div class="relative  mt-12">
     <div class="grid gap-px sm:grid-cols-1  lg:grid-cols-3  lg:items-center">
-      {% for i  in  '123' %}
-      <div class="flex flex-col h-full text-center px-3 py-4">
+      {% for i  in  course %}
+      <div class="flex flex-col h-full  px-3 py-4">
         <div class="flex flex-col bg-white border shadow-sm rounded-xl">
-          <img class="w-full h-auto rounded-t-xl" src="https://images.unsplash.com/photo-1680868543815-b8666dba60f7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2532&q=80" alt="Image Description">
+          <img class="w-full h-auto rounded-t-xl" src="{{i.thumbnail}}" alt="Image Description">
           <div class="p-4 md:p-5">
             <h3 class="text-lg font-bold text-gray-800">
-              Card title
+              {{i.title}}
             </h3>
             <p class="mt-1 text-gray-500">
               Some quick example text to build on the card title and make up the bulk of the card's content.
             </p>
-            <a class="mt-2 py-2 px-3 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none" href="#">
+            <a class="transition mt-2 py-2 px-3 inline-flex  gap-x-2 text-sm font-semibold rounded-lg border border-transparent hover:bg-yellow-400 text-white bg-purple-600 disabled:opacity-50 disabled:pointer-events-none" href="#">
               Go somewhere
             </a>
           </div>
@@ -69,4 +65,140 @@
       {% endfor %}
     </div>
   </div>
+</div>
+
+<!-- Contact -->
+<div class="max-w-7xl px-4 lg:px-8 py-12 lg:py-24 mx-auto" >
+  <div class="mb-6 sm:mb-10 max-w-2xl text-center mx-auto">
+    <h2 class="text-2xl font-bold md:text-4xl md:leading-tight">Prendre Un Rendez-vous</h2>
+    <p class="mt-1 text-gray-600">Pay as you go service, cancel anytime.</p>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-2 lg:items-center gap-6 md:gap-8 lg:gap-12" id="appointement">
+    <div class="  bg-gray-50 rounded-3xl">
+      <div class="py-10 px-12">
+        <form method="POST" action="make_appoint">
+          {% csrf_token %}
+          
+          <div class="grid gap-4 lg:gap-6">
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6">
+              <div>
+                <label for="first_name" class="block mb-2 text-sm text-gray-700 font-medium d">Prenom</label>
+                <input type="text" name="first_name" id="first_name" class="bg-white py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none ">
+              </div>
+  
+              <div>
+                <label for="last_name" class="block mb-2 text-sm text-gray-700 font-medium d">Nom</label>
+                <input type="text" name="last_name" id="last_name" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none ">
+              </div>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6">
+              <div>
+                <label for="Numero de telephone" class="block mb-2 text-sm text-gray-700 font-medium d">Numero de telephone</label>
+                <input type="text"  oninput="this.value = this.value.replace(/[^0-9]/g, '')" name="Numero de telephone" id="phone_number"  class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none ">
+              </div>
+              <div>
+                <label for="cni" class="block mb-2 text-sm text-gray-700 font-medium d">Cni</label>
+                <input type="text" name="cni" id="cni"  class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none ">
+              </div>
+  
+             
+            </div>
+            <div>
+              <label for="email" class="block mb-2 text-sm text-gray-700 font-medium w-full">Email</label>
+              <input type="text" name="email" id="email" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none ">
+            </div>
+            <div>
+              <label for="email" class="block mb-2 text-sm text-gray-700 font-medium w-full">Message</label>
+              <input type="text" name="msg" id="msg" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none ">
+            </div>
+            
+          </div>
+          <div class="mt-6 grid">
+            <button type="submit" class="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-purple-600 text-white hover:bg-yellow-400 transition disabled:opacity-50 disabled:pointer-events-none">Envoyer la demande</button>
+          </div>
+          <div class="py-4">
+            {% include "msg/msg.html" %}
+          </div>
+  
+          <div class="mt-3 text-center">
+            <p class="text-sm text-gray-500 dark:text-neutral-500">
+              Nous vous répondrons dans 1 à 2 jours ouvrables.
+            </p>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- End Col -->
+
+    <div class="space-y-8 lg:space-y-16">
+      <div>
+        <h3 class="mb-5 font-semibold text-black">
+          Our address
+        </h3>
+
+        <!-- Grid -->
+        <div class="grid sm:grid-cols-2 gap-4 sm:gap-6 md:gap-8 lg:gap-12">
+          <div class="flex gap-4">
+            <svg class="flex-shrink-0 size-5 text-gray-500" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+
+            <div class="grow">
+              <p class="text-sm text-gray-600">
+                United Kingdom
+              </p>
+              <address class="mt-1 text-black not-italic">
+                300 Bath Street, Tay House<br>
+                Glasgow G2 4JR
+              </address>
+            </div>
+          </div>
+        </div>
+        <!-- End Grid -->
+      </div>
+
+      <div>
+        <h3 class="mb-5 font-semibold text-black">
+          Our contacts
+        </h3>
+
+        <!-- Grid -->
+        <div class="grid sm:grid-cols-2 gap-4 sm:gap-6 md:gap-8 lg:gap-12">
+          <div class="flex gap-4">
+            <svg class="flex-shrink-0 size-5 text-gray-500" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21.2 8.4c.5.38.8.97.8 1.6v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V10a2 2 0 0 1 .8-1.6l8-6a2 2 0 0 1 2.4 0l8 6Z"></path><path d="m22 10-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 10"></path></svg>
+
+            <div class="grow">
+              <p class="text-sm text-gray-600">
+                Email us
+              </p>
+              <p>
+                <a class="relative inline-block font-medium text-black before:absolute before:bottom-0.5 before:start-0 before:-z-[1] before:w-full before:h-1 before:bg-purple-500  focus:outline-none focus:before:bg-black" href="mailto:example@site.so">
+                  hello@example.so
+                </a>
+              </p>
+            </div>
+          </div>
+
+          <div class="flex gap-4">
+            <svg class="flex-shrink-0 size-5 text-gray-500" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+
+            <div class="grow">
+              <p class="text-sm text-gray-600">
+                Call us
+              </p>
+              <p>
+                <a class="relative inline-block font-medium text-black before:absolute before:bottom-0.5 before:start-0 before:-z-[1] before:w-full before:h-1 before:bg-purple-500 focus:outline-none focus:before:bg-black" href="mailto:example@site.so">
+                  +44 222 777-000
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+        <!-- End Grid -->
+      </div>
+    </div>
+    <!-- End Col -->
+  </div>
+</div>
+<!-- End Contact -->
 {% endblock content %}
