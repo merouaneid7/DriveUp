@@ -8,7 +8,7 @@
   
 
 <!-- ========== HEADER ========== -->
-<header class="flex flex-wrap md:justify-start md:flex-nowrap z-50 w-full py-7">
+<header class="flex flex-wrap md:justify-start md:flex-nowrap z-50 w-full py-7 ">
     <nav class="relative max-w-7xl w-full flex flex-wrap md:grid md:grid-cols-12 basis-full items-center px-4 md:px-8 mx-auto " aria-label="Global">
       <div class="md:col-span-3">
         <!-- Logo -->
@@ -25,10 +25,10 @@
       
       <div class="flex items-center gap-x-2 ms-auto py-1 md:ps-6 md:order-3 md:col-span-3">
         <button type="button" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-xl border border-gray-200 text-black hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none">
-          <a href="#">Se connecter</a>
+          <a href="{% url 'login' %}">Se connecter</a>
         </button>
-        <button type="button" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-xl border border-transparent   hover:bg-purple-600 bg-yellow-300 text-white transition disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:bg-purple-500">
-          <a href="#">S'inscrire</a>
+        <button type="button" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-xl border border-transparent   hover:bg-purple-600 bg-yellow-400 text-white transition disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:bg-purple-500">
+          <a href="{% url 'signup' %}">S'inscrire</a>
         </button>
   
         <div class="md:hidden">
@@ -59,7 +59,7 @@
                 </li>
                 {% else %}
                 <li>
-                  <a href="{% url 'my_dash' %}" class="block px-4 py-2 hover:bg-gray-100 ">Table de bord</a>
+                  <a href="{% url 'my_dash/welcome' %}" class="block px-4 py-2 hover:bg-gray-100 ">Table de bord</a>
                 </li>
                 {% endif %}
                 

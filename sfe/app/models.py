@@ -8,10 +8,7 @@ class User_otherfields(models.Model):
     user=models.OneToOneField(User,on_delete=models.CASCADE,null=True)
     profile_image=models.ImageField(upload_to="static" , null=True)
     cni=models.CharField(max_length=10,blank=True)
-    
 
-    def __str__(self):
-        return self.user.username
 
 class Course(models.Model):
     title = models.CharField(max_length=100,null=True)
@@ -53,3 +50,13 @@ class Appointement(models.Model):
     email=models.EmailField(max_length=20,null=True)
     message=models.CharField(max_length=40,null=True)
     date=models.TextField(null=True)
+
+
+
+class Driver(models.Model):
+    user=models.OneToOneField(User,on_delete=models.CASCADE,null=True)
+    profile_image=models.ImageField(upload_to="static" , null=True)
+    level=models.CharField(max_length=10,null=True)
+    is_driver=models.BooleanField(null=True)
+
+    

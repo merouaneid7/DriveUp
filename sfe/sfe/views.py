@@ -22,8 +22,13 @@ def home(request):
     }
     return render(request,"main/home.html",context)
 
+
+def take_driver(request):
+    return render(request,"main/take_driver.html")
+
+
 def appointement(request):
-    new_appointement=Appointement.objects.all()
+    new_appointement=Appointement.objects.all().order_by('accepted')
 
     context={
         'new_appointement':new_appointement,
@@ -38,22 +43,64 @@ def make_appoint(request):
         cni=request.POST.get('cni')
         phone_number=request.POST.get('phone_number')
         msg=request.POST.get('msg')
-    
-    appointement=Appointement.objects.create(nom=nom,prenom=prenom,cni=cni,numero_telephone=phone_number,email=email,message=msg)
-    appointement.save()
-    messages.success(request,"la demande est envoyer avec succes")
+        
+    if nom is not "" and prenom is not "" and email is not "":         
+        appointement=Appointement.objects.create(nom=nom,prenom=prenom,cni=cni,numero_telephone=phone_number,email=email,message=msg)
+        appointement.save()
+        messages.success(request,"la demande est envoyer avec succes")
+    else:
+        messages.error(request,"Entre au moins Votre nom,prenom et email")
+
+   
     return redirect('/#appointement')
 
-
-
-def approve_appoint(request,app_id):
-    user_email=Appointement.objects.get(pk=app_id)
+def add_appoint(request):
     if request.method == 'POST':
+        nom=request.POST.get('last_name')
+        prenom=request.POST.get('first_name')
+        email=request.POST.get('email')
+        cni=request.POST.get('cni')
+        phone_number=request.POST.get('phone_number')
+        msg=request.POST.get('msg')
         date=request.POST.get('date')
-        print(date)
-    appointement=Appointement.objects.filter(id=app_id)
-    appointement.update(date=date,accepted=True)
-    messages.success(request,"Rendez vous accepte pour le " f"{date}")
+    
+    appointement=Appointement.objects.create(nom=nom,prenom=prenom,cni=cni,numero_telephone=phone_number,email=email,message=msg,date=date)
+    appointement.save()
+    messages.success(request,"la demande est envoyer avec succes")
+    return redirect('appointement')
+
+
+
+from datetime import date
+def approve_appoint(request,app_id):
+    our_appoint=Appointement.objects.get(pk=app_id)
+    user_email=our_appoint.email
+    user_name=our_appoint.nom
+
+    if request.method == 'POST':
+        date1=request.POST.get('date')
+    actual_date=date.today()  
+    actual_date_str = actual_date.strftime("%d/%m/%Y")
+    print(actual_date_str)
+    print(date1)
+    print(date1>actual_date_str)
+    
+    
+
+    if date1 is not "" :
+        appointement=Appointement.objects.filter(id=app_id)
+        appointement.update(date=date1,accepted=True)
+        messages.success(request,"Rendez vous accepte pour le " f"{date1}")
+        send_mail(
+            "Votre compte IKKIS AE est active",
+            "Bonjour " f"{user_name}" " , Votre rendez vous est accepter pour la date " f"{date1} .",
+            "ikkisauto@gmail.com",
+            [user_email],
+            fail_silently=False,
+        )
+    else:
+        messages.error(request,"date non valide")
+    
     return redirect("appointement")
 
 def active_appoint(request):
@@ -93,15 +140,39 @@ def userslist(request):
 
     user_approved = User.objects.filter(is_active=True)
     user_inapproved = User.objects.filter(is_active=False)
+    
     context = {
         'users':users,
         'page_obj': page_obj,  
         'user_approved': user_approved,
         'user_inapproved': user_inapproved,
         'user_otherfields':user_otherfields,
+        
     }
     return render(request, "adm/userslist.html", context)
 
+def only_superviseur(request):
+    users=User.objects.filter(driver__is_driver=True)
+    paginator = Paginator(users, 5) 
+    page_number = request.GET.get('page')
+
+    
+    page_obj = paginator.get_page(page_number)
+    
+    if page_obj is EmptyPage:
+        
+        render("userslist")
+
+    user_approved = User.objects.filter(is_active=True)
+    user_inapproved = User.objects.filter(is_active=False)
+    context = {
+        'users':users,
+        'page_obj': page_obj,  
+        'user_approved': user_approved,
+        'user_inapproved': user_inapproved,
+    }
+    return render(request, "adm/userslist.html", context)
+    
 
 def superuser_required(user):
     return user.is_superuser
