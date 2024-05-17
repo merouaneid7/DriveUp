@@ -3,8 +3,5 @@ from .models import *
 
 # Register your models here.
 admin.site.register(User_otherfields)
-admin.site.register(Course)
-admin.site.register(Part)
-admin.site.register(Lesson)
 admin.site.register(Appointement)
 admin.site.register(Driver)

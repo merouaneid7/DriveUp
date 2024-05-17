@@ -2,6 +2,7 @@ from . import views
 from django.contrib import admin
 from django.urls import path,include
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("__reload__/", include("django_browser_reload.urls")),
@@ -36,7 +37,12 @@ urlpatterns = [
     path('dashboard/appointement/inactive',views.inactive_appoint,name="inactive_appoint"),
     path('dashboard/appointement/inactive/add_appoint',views.add_appoint,name="add_appoint"),
     path('take_driver',views.take_driver,name="take_driver"),
+    path('driving_offers',views.Driving_offers,name="driving_offers"),
+    path('drivers_list',views.drivers_list,name="drivers_list"),
+    path('add_driver',views.add_driver,name="add_driver"),
    
     
    
 ]
+
+

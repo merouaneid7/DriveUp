@@ -89,20 +89,20 @@
                                 Nom et prenom
                             </th>
                             <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase ">
-                                Position
+                                Type
+                            </th>
+                            <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase ">
+                                Niveau
                             </th>
                             <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase ">
                                 Status
-                            </th>
-                            <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase ">
-                                email
                             </th>
                             <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase ">
                                 Actions
                             </th>
                         </tr>
                     </thead>
-                    {% for user in page_obj  %}
+                    {% for i in page_obj  %}
                     <tbody class="bg-white divide-y divide-gray-200  ">
                         <tr class="hover:bg-gray-100 ">
                             <td class="w-4 p-4">
@@ -110,40 +110,87 @@
                                 </div>
                             </td>
                             <td class="flex items-center p-4 mr-12 space-x-6 whitespace-nowrap">
-                                <img class="w-10 h-10 rounded-full" src="{{user.user_otherfields.profile_image.url}}" alt="{{ user.username }}">
+                                <img class="w-10 h-10 rounded-full" src="{{i.user.user_otherfields.profile_image.url}}" alt="{{ i.user.username }}">
                                 <div class="text-sm font-normal text-gray-500 ">
-                                    <div class="text-base font-semibold text-gray-900 "><button > <a href="{% url 'profile' user_id=user.id %}"> {{user.last_name}} {{user.first_name}} </a></button></div>
+                                    <div class="text-base font-semibold text-gray-900 "><button > <a href="{% url 'profile' user_id=i.user.id %}"> {{i.user.last_name}} {{i.user.first_name}} </a></button></div>
                                 </div>
                             </td>
                             
-                            {% if user.is_superuser is True %}
-                            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap "><svg xmlns="http://www.w3.org/2000/svg" class="inline-block w-3 mx-2" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#000000" d="M224 16c-6.7 0-10.8-2.8-15.5-6.1C201.9 5.4 194 0 176 0c-30.5 0-52 43.7-66 89.4C62.7 98.1 32 112.2 32 128c0 14.3 25 27.1 64.6 35.9c-.4 4-.6 8-.6 12.1c0 17 3.3 33.2 9.3 48H45.4C38 224 32 230 32 237.4c0 1.7 .3 3.4 1 5l38.8 96.9C28.2 371.8 0 423.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7c0-58.5-28.2-110.4-71.7-143L415 242.4c.6-1.6 1-3.3 1-5c0-7.4-6-13.4-13.4-13.4H342.7c6-14.8 9.3-31 9.3-48c0-4.1-.2-8.1-.6-12.1C391 155.1 416 142.3 416 128c0-15.8-30.7-29.9-78-38.6C324 43.7 302.5 0 272 0c-18 0-25.9 5.4-32.5 9.9c-4.8 3.3-8.8 6.1-15.5 6.1zm56 208H267.6c-16.5 0-31.1-10.6-36.3-26.2c-2.3-7-12.2-7-14.5 0c-5.2 15.6-19.9 26.2-36.3 26.2H168c-22.1 0-40-17.9-40-40V169.6c28.2 4.1 61 6.4 96 6.4s67.8-2.3 96-6.4V184c0 22.1-17.9 40-40 40zm-88 96l16 32L176 480 128 288l64 32zm128-32L272 480 240 352l16-32 64-32z"/></svg>
-                                Admin
-                            </td> 
-                            
-                            {% elif user.driver.is_driver is True %}
+                            {% if i.vehicle == "Voiture" %}
                             <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap ">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="inline-block w-3.5 mx-2" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M135.2 117.4L109.1 192H402.9l-26.1-74.6C372.3 104.6 360.2 96 346.6 96H165.4c-13.6 0-25.7 8.6-30.2 21.4zM39.6 196.8L74.8 96.3C88.3 57.8 124.6 32 165.4 32H346.6c40.8 0 77.1 25.8 90.6 64.3l35.2 100.5c23.2 9.6 39.6 32.5 39.6 59.2V400v48c0 17.7-14.3 32-32 32H448c-17.7 0-32-14.3-32-32V400H96v48c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32V400 256c0-26.7 16.4-49.6 39.6-59.2zM128 288a32 32 0 1 0 -64 0 32 32 0 1 0 64 0zm288 32a32 32 0 1 0 0-64 32 32 0 1 0 0 64z"/></svg>
-                                
-                                Superviseur
-                            </td> 
-                            {% else %} 
-                            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap "><svg xmlns="http://www.w3.org/2000/svg" class="inline-block w-3 mx-2" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#000000" d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/></svg> 
-                                Client
-                            </td> 
+                              <svg xmlns="http://www.w3.org/2000/svg" class="inline-block w-5 mx-2" viewBox="0 0 640 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M171.3 96H224v96H111.3l30.4-75.9C146.5 104 158.2 96 171.3 96zM272 192V96h81.2c9.7 0 18.9 4.4 25 12l67.2 84H272zm256.2 1L428.2 68c-18.2-22.8-45.8-36-75-36H171.3c-39.3 0-74.6 23.9-89.1 60.3L40.6 196.4C16.8 205.8 0 228.9 0 256V368c0 17.7 14.3 32 32 32H65.3c7.6 45.4 47.1 80 94.7 80s87.1-34.6 94.7-80H385.3c7.6 45.4 47.1 80 94.7 80s87.1-34.6 94.7-80H608c17.7 0 32-14.3 32-32V320c0-65.2-48.8-119-111.8-127zM434.7 368a48 48 0 1 1 90.5 32 48 48 0 1 1 -90.5-32zM160 336a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"/></svg>
+                              Voiture
+                            </td>
+                            
+                            {% elif  i.vehicle == 'Moto' %}
+                            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap ">
+                              <svg xmlns="http://www.w3.org/2000/svg" class="inline-block w-5 mx-2" viewBox="0 0 640 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M280 32c-13.3 0-24 10.7-24 24s10.7 24 24 24h57.7l16.4 30.3L256 192l-45.3-45.3c-12-12-28.3-18.7-45.3-18.7H64c-17.7 0-32 14.3-32 32v32h96c88.4 0 160 71.6 160 160c0 11-1.1 21.7-3.2 32h70.4c-2.1-10.3-3.2-21-3.2-32c0-52.2 25-98.6 63.7-127.8l15.4 28.6C402.4 276.3 384 312 384 352c0 70.7 57.3 128 128 128s128-57.3 128-128s-57.3-128-128-128c-13.5 0-26.5 2.1-38.7 6L418.2 128H480c17.7 0 32-14.3 32-32V64c0-17.7-14.3-32-32-32H459.6c-7.5 0-14.7 2.6-20.5 7.4L391.7 78.9l-14-26c-7-12.9-20.5-21-35.2-21H280zM462.7 311.2l28.2 52.2c6.3 11.7 20.9 16 32.5 9.7s16-20.9 9.7-32.5l-28.2-52.2c2.3-.3 4.7-.4 7.1-.4c35.3 0 64 28.7 64 64s-28.7 64-64 64s-64-28.7-64-64c0-15.5 5.5-29.7 14.7-40.8zM187.3 376c-9.5 23.5-32.5 40-59.3 40c-35.3 0-64-28.7-64-64s28.7-64 64-64c26.9 0 49.9 16.5 59.3 40h66.4C242.5 268.8 190.5 224 128 224C57.3 224 0 281.3 0 352s57.3 128 128 128c62.5 0 114.5-44.8 125.8-104H187.3zM128 384a32 32 0 1 0 0-64 32 32 0 1 0 0 64z"/></svg> 
+                              Moto
+                            </td>
+                            
+                            {% else %}
+                            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap ">
+                              <svg xmlns="http://www.w3.org/2000/svg" class="inline-block w-5 mx-2 " viewBox="0 0 640 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M64 32C28.7 32 0 60.7 0 96V304v80 16c0 44.2 35.8 80 80 80c26.2 0 49.4-12.6 64-32c14.6 19.4 37.8 32 64 32c44.2 0 80-35.8 80-80c0-5.5-.6-10.8-1.6-16H416h33.6c-1 5.2-1.6 10.5-1.6 16c0 44.2 35.8 80 80 80s80-35.8 80-80c0-5.5-.6-10.8-1.6-16H608c17.7 0 32-14.3 32-32V288 272 261.7c0-9.2-3.2-18.2-9-25.3l-58.8-71.8c-10.6-13-26.5-20.5-43.3-20.5H480V96c0-35.3-28.7-64-64-64H64zM585 256H480V192h48.8c2.4 0 4.7 1.1 6.2 2.9L585 256zM528 368a32 32 0 1 1 0 64 32 32 0 1 1 0-64zM176 400a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zM80 368a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"/></svg>
+                              Poid Lourd
+                            </td>
                             
                             {% endif %}
+                             
                             
-                            {% if user.is_active is True %}
+                            
+                            
+                                
+                            
+                             {% if i.level == 'Artiste du Volant' %}
+                             <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap ">
+                              <span class="bg-gray-100 text-gray-800 text-sm font-medium me-2 py-1 pl-2 pr-5 rounded  ">
+
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                        class="-mt-0.5 h-5 w-5 text-yellow-400 inline-block ">
+                                        <path fill-rule="evenodd"
+                                          d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
+                                          clip-rule="evenodd"></path>
+                                      </svg> 
+                                      <p class="me-2 inline-block ">Artiste du Volant</p>
+                              </span>
+                              
+                            </td>
+                            {% elif i.level == 'Maitre Conducteur' %}
+                            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap ">
+                              <span class="bg-green-500 text-white text-sm font-medium me-2 py-1 px-2 rounded  ">
+
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                        class="-mt-0.5 h-5 w-5 text-yellow-400 inline-block ">
+                                        <path fill-rule="evenodd"
+                                          d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
+                                          clip-rule="evenodd"></path>
+                                      </svg> 
+                                      <p class="me-2 inline-block ">Maitre Conducteur</p>
+                              </span>
+                              
+                            </td>
+                            {% else %}
+                            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap ">
+                              <span class="bg-purple-600 text-white text-sm font-medium me-2 py-1 pl-2 pr-6 rounded  ">
+
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                        class="-mt-0.5 h-5 w-5 text-yellow-400 inline-block ">
+                                        <path fill-rule="evenodd"
+                                          d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
+                                          clip-rule="evenodd"></path>
+                                      </svg> 
+                                      <p class="me-2 inline-block ">Expert au Volant</p>
+                              </span>
+                              
+                            </td>
+                             {% endif %}
+                             {% if i.user.is_active is True %}
                             <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap "><div class="h-2.5 w-2.5 rounded-full bg-green-500 me-2 inline-block"></div> Actif</td>
                             {% else %}
                             <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap "><div class="h-2.5 w-2.5 rounded-full bg-red-500 me-2 inline-block"></div> Inactif</td>
                               
-                            {% endif %}
-                                
+                            {% endif %}                   
                             
-                                                
-                            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap ">{{user.email}}</td>
                             
                             <td class="p-4 space-x-2 whitespace-nowrap">
                                 <button type="button" data-modal-target="edit-user-modal-{{user.id}}" data-modal-toggle="edit-user-modal-{{user.id}}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-black rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 ">
@@ -321,7 +368,7 @@
             </div>
             <!-- Modal body -->
             <div class="p-6 space-y-6">
-                <form action="add_user" method="">
+                <form action="{% url 'add_driver' %}" method="POST">
                     {% csrf_token %}
                     <div class="grid grid-cols-6 gap-6">
                         <div class="col-span-6 sm:col-span-3">
@@ -348,12 +395,31 @@
                             <label for="profile_img" class="block mb-2 text-sm font-medium text-gray-900 ">image de profile</label>
                             <input type="file" name="profile_img" id="profile_img" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 " placeholder="e.g. React developer" required>
                         </div>
+
+                        <div class="col-span-6 sm:col-span-3">
+                              <label for="level" class="block mb-2 text-sm font-medium text-gray-900 ">Niveau</label>
+                              
+                              <select id="level" name="level" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 ">
+                                        <option value="Artiste du Volant">Artiste du Volant</option>
+                                        <option value="Maitre Conducteur">Maitre Conducteur</option>
+                                        <option value="Expert au Volant">Expert au Volant</option>
+                              </select>
+                    </div>
+                          <div class="col-span-6 sm:col-span-3">
+                              <label for="vehicle" class="block mb-2 text-sm font-medium text-gray-900 ">Type de vehicule</label>
+                              
+                              <select id="vehicle" name="vehicle" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 ">
+                                        <option value="Voiture">Voiture</option>
+                                        <option value="Moto">Moto</option>
+                                        <option value="Poid lourd">Poid lourd</option>
+                              </select>
+                    </div>
                        
                     </div> 
                 </div>
                 <!-- Modal footer -->
                 <div class="items-center p-6 border-t border-gray-200 rounded-b ">
-                    <button class="text-white bg-gray-900 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800" type="submit">Add user</button>
+                    <button class="text-white bg-gray-900 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800" type="submit">Add driver</button>
                 </div>
             </form>
         </div>

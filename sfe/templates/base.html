@@ -22,7 +22,7 @@
           <button type="button" class="py-2 px-4 mx-1.5 inline-flex items-center gap-x-2 text-sm font-medium rounded-xl border border-gray-200 text-black hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none ">
             <a href="{% url 'login' %}">Se Connecter</a>
           </button>
-          <button type="button" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-xl border border-transparent bg-yellow-400 text-white hover:bg-purple-600 disabled:pointer-events-none focus:outline-none focus:bg-purple-500 transition">
+          <button type="button" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-xl border border-transparent hover:bg-yellow-400 text-white bg-purple-600 disabled:pointer-events-none focus:outline-none focus:bg-purple-500 transition">
             <a href="{% url 'signup' %}">S'inscrire</a>
           </button>
           {% else %}
@@ -75,7 +75,7 @@
                     <a href="#" class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 ">Company</a>
                 </li>
                 <li>
-                    <a href="#" class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 ">Marketplace</a>
+                    <a href="{% url 'driving_offers' %}" class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 ">Marketplace</a>
                 </li>
                 <li>
                     <a href="#" class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 ">Features</a>

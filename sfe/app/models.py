@@ -10,35 +10,6 @@ class User_otherfields(models.Model):
     cni=models.CharField(max_length=10,blank=True)
 
 
-class Course(models.Model):
-    title = models.CharField(max_length=100,null=True)
-    thumbnail=models.ImageField(upload_to="static" , null=True)
-    price=models.IntegerField(null=True)
-    description = models.TextField(null=True)
-
-
-    def clean(self):
-        super().clean()
-        if Course.objects.count() >= 3:
-            raise ValidationError("Maximum of 3 courses allowed.")
-        
-
-class Part(models.Model):
-    course = models.ForeignKey(Course, on_delete=models.CASCADE,null=True)
-    title = models.CharField(max_length=100,null=True)
-    thumbnail=models.ImageField(upload_to="static" , null=True)
-
-    def clean(self):
-        super().clean()
-        if Part.objects.filter(course=self.course).count() >= 4:
-            raise ValidationError("Maximum of 4 parts per course allowed.")
-        
-
-class Lesson(models.Model):
-    part = models.ForeignKey(Part, on_delete=models.CASCADE,null=True)
-    title = models.CharField(max_length=100,null=True)
-    thumbnail=models.ImageField(upload_to="static" , null=True)
-
 
 
 class Appointement(models.Model):
@@ -54,9 +25,32 @@ class Appointement(models.Model):
 
 
 class Driver(models.Model):
+    CAR = 'Voiture'
+    MOTO = 'Moto'
+    POIDS_LOURD = 'Poids Lourd'
+
+    VEHICLE_CHOICES = [
+        (CAR ,'Voiture'),
+        (MOTO ,'Moto'),
+        (POIDS_LOURD ,'Poids lourd'),
+    ]
+
+    Artiste_du_Volant='Artiste du Volant'
+    Maitre_Conducteur='Maitre Conducteur'
+    Expert_au_Volant='Expert au Volant'
+
+    LEVEL_CHOICES=[
+        (Artiste_du_Volant, 'Artiste du Volant'),
+        (Maitre_Conducteur, 'Maitre Conducteur'),
+        (Expert_au_Volant, 'Expert au Volant'),
+    ]
+
+
+    
     user=models.OneToOneField(User,on_delete=models.CASCADE,null=True)
     profile_image=models.ImageField(upload_to="static" , null=True)
-    level=models.CharField(max_length=10,null=True)
+    level=models.CharField(max_length=20,choices=LEVEL_CHOICES,null=True)
     is_driver=models.BooleanField(null=True)
+    vehicle = models.CharField(max_length=20, choices=VEHICLE_CHOICES,null=True)
 
     

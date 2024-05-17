@@ -16,11 +16,119 @@ from datetime import datetime
 
 
 def home(request):
-    course=Course.objects.all()
-    context={
-        'course':course,
+    
+    return render(request,"main/home.html")
+
+
+def Driving_offers(request):
+    return render(request,"main/driving_offers.html")
+
+def drivers_list(request):
+    users = Driver.objects.all()
+    user_otherfields=User_otherfields.objects.all()
+    paginator = Paginator(users, 5) 
+    page_number = request.GET.get('page')
+    
+    
+    page_obj = paginator.get_page(page_number)
+    
+    if page_obj is EmptyPage:
+        
+        render("userslist")
+
+    user_approved = User.objects.filter(is_active=True)
+    user_inapproved = User.objects.filter(is_active=False)
+    
+    context = {
+        'users':users,
+        'page_obj': page_obj,  
+        'user_approved': user_approved,
+        'user_inapproved': user_inapproved,
+        'user_otherfields':user_otherfields,
+        
     }
-    return render(request,"main/home.html",context)
+    return render(request,"adm/drivers_list.html",context)
+
+
+def add_driver(request):
+    if request.method == "POST":
+        username = request.POST.get('username')
+        first_name=request.POST.get('first_name')
+        last_name=request.POST.get('last_name')
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        confirm_password=request.POST.get('confirm_password')
+        profile_img=request.POST.get('profile_img')
+        cni=request.POST.get('cni')
+        level=request.POST.get('level')
+        vehicle=request.POST.get('vehicle')
+        print(level)
+        print(vehicle)
+
+        if User.objects.filter(email=email).exists():
+           
+           messages.error(request,"Ce e-mail existe déjà ")
+           return redirect('userlist')
+
+        if User.objects.filter(username=username).exists():
+           messages.error(request,"Le nom d'utilisateur existe déjà ")
+           return redirect('userlist')
+        
+        if confirm_password != password:
+            messages.error(request,"Les mots de passe ne correspondent pas")
+            return redirect('userlist')
+        
+        user = User.objects.create_user(username=username,email=email,password=password,last_name=last_name,first_name=first_name)
+        user.is_active=False
+        user.save()
+
+        otherfields=User_otherfields.objects.create(user=user,profile_image=profile_img,cni=cni)
+        otherfields.save()
+
+        driver=Driver.objects.create(user=user,level=level,vehicle=vehicle,is_driver=True)
+        driver.save()
+
+        
+        messages.success(request,"Vous avez ajoutee le chauffeur " f"{user.username} ")
+        return redirect('drivers_list')
+    
+    
+    return render(request,'adm/drivers_list.html')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 def take_driver(request):
