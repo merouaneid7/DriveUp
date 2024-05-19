@@ -97,7 +97,8 @@ def add_driver(request):
 
 
 
-
+def driver_offers(request):
+    return render(request,"driver/driver_offers.html")
 
 
 

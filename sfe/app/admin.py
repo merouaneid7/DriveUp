@@ -5,3 +5,4 @@ from .models import *
 admin.site.register(User_otherfields)
 admin.site.register(Appointement)
 admin.site.register(Driver)
+admin.site.register(Driving_offer)

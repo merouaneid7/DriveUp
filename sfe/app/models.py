@@ -48,9 +48,29 @@ class Driver(models.Model):
 
     
     user=models.OneToOneField(User,on_delete=models.CASCADE,null=True)
-    profile_image=models.ImageField(upload_to="static" , null=True)
     level=models.CharField(max_length=20,choices=LEVEL_CHOICES,null=True)
     is_driver=models.BooleanField(null=True)
     vehicle = models.CharField(max_length=20, choices=VEHICLE_CHOICES,null=True)
 
+    def __str__(self):
+        return self.user.username
+
     
+
+class Driving_offer(models.Model):
+    conduite_de_base='conduite de base'
+    conduite_sur_ville='conduite sur ville'
+    conduite_sur_circuit='conduite sur circuit'
+    
+    driving_offer_CHOICES=[
+        (conduite_de_base,'conduite de base'),
+        (conduite_sur_ville,'conduite sur ville'),
+        (conduite_sur_circuit,'conduite sur circuit'),
+    ]
+
+
+    driver=models.OneToOneField(Driver,on_delete=models.CASCADE,null=True)
+    offer_type=models.CharField(max_length=30,choices=driving_offer_CHOICES)
+    price_per_hour=models.IntegerField(null=True)
+
+
