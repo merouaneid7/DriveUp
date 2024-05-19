@@ -69,7 +69,7 @@ class Driving_offer(models.Model):
     ]
 
 
-    driver=models.OneToOneField(Driver,on_delete=models.CASCADE,null=True)
+    driver=models.ForeignKey(Driver,on_delete=models.CASCADE,null=True)
     offer_type=models.CharField(max_length=30,choices=driving_offer_CHOICES)
     price_per_hour=models.IntegerField(null=True)
 

@@ -40,7 +40,8 @@ urlpatterns = [
     path('driving_offers',views.Driving_offers,name="driving_offers"),
     path('drivers_list',views.drivers_list,name="drivers_list"),
     path('add_driver',views.add_driver,name="add_driver"),
-    path('my_dashboard/my_offers',views.driver_offers,name="my_dash/my_offers")
+    path('my_dashboard/my_offers',views.driver_offers,name="my_dash/my_offers"),
+    path("my_dashboard/my_offers/create_driving_offer", views.create_driving_offer, name="create_driving_offer")
    
     
    

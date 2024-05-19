@@ -98,9 +98,24 @@ def add_driver(request):
 
 
 def driver_offers(request):
-    return render(request,"driver/driver_offers.html")
+    current_d=request.user.driver
+    driving_offers=Driving_offer.objects.filter(driver=current_d)
+  
+    context={
+        'driving_offers':driving_offers,
+    }
+    return render(request,"driver/driver_offers.html",context)
 
+def create_driving_offer(request):
+    current_d=request.user.driver
+    if request.method == 'POST':
+        offer_type=request.POST.get("offer_type")
+        price=request.POST.get("price")
 
+    driving_offer=Driving_offer.objects.create(driver=current_d,offer_type=offer_type,price_per_hour=price)
+    driving_offer.save()
+    messages.success(request,"offre creer avec succes")
+    return redirect("my_dash/my_offers")
 
 
 
