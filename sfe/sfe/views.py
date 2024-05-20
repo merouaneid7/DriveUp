@@ -20,8 +20,12 @@ def home(request):
     return render(request,"main/home.html")
 
 
-def Driving_offers(request):
-    return render(request,"main/driving_offers.html")
+def driving_offers(request):
+    driving_offers=Driving_offer.objects.all()
+    context={
+        'driving_offers':driving_offers,
+    }
+    return render(request,"main/driving_offers.html",context)
 
 def drivers_list(request):
     users = Driver.objects.all()
@@ -119,11 +123,47 @@ def create_driving_offer(request):
 
 
 
+def delete_driving_offer(request,offer_id):
+    offer=Driving_offer.objects.filter(id=offer_id)
+    offer.delete()
+    messages.error(request,"offre supprime avec succes")
+    return redirect("my_dash/my_offers")
 
 
 
 
+def activate_driving_offer(request,offer_id):
+    offer=Driving_offer.objects.filter(id=offer_id).update(is_active=True)
+    
+    messages.success(request,"offre active avec succes")
+    return redirect("my_dash/my_offers")
 
+def inactivate_driving_offer(request,offer_id):
+    offer=Driving_offer.objects.filter(id=offer_id).update(is_active=False)
+    
+    messages.error(request,"offre active avec succes")
+    return redirect("my_dash/my_offers")
+
+def active_driving_offer(request):
+    driving_offers=Driving_offer.objects.filter(is_active=True)
+    context={
+        'driving_offers':driving_offers,
+    }
+    return render(request,"driver/driver_offers.html",context)
+
+def inactive_driving_offer(request):
+    driving_offers=Driving_offer.objects.filter(is_active=False)
+    context={
+        'driving_offers':driving_offers,
+    }
+    return render(request,"driver/driver_offers.html",context)
+
+def last_added_driving_offer(request):
+    driving_offers=Driving_offer.objects.all().order_by('-id')
+    context={
+        'driving_offers':driving_offers,
+    }
+    return render(request,"driver/driver_offers.html",context)
 
 
 

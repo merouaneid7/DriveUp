@@ -37,11 +37,18 @@ urlpatterns = [
     path('dashboard/appointement/inactive',views.inactive_appoint,name="inactive_appoint"),
     path('dashboard/appointement/inactive/add_appoint',views.add_appoint,name="add_appoint"),
     path('take_driver',views.take_driver,name="take_driver"),
-    path('driving_offers',views.Driving_offers,name="driving_offers"),
+    path('driving_offers',views.driving_offers,name="driving_offers"),
     path('drivers_list',views.drivers_list,name="drivers_list"),
     path('add_driver',views.add_driver,name="add_driver"),
     path('my_dashboard/my_offers',views.driver_offers,name="my_dash/my_offers"),
-    path("my_dashboard/my_offers/create_driving_offer", views.create_driving_offer, name="create_driving_offer")
+    path("my_dashboard/my_offers/create_driving_offer", views.create_driving_offer, name="create_driving_offer"),
+    path("my_dashboard/my_offers/delete_driving_offer/<int:offer_id>", views.delete_driving_offer, name="delete_driving_offer"),
+    path("my_dashboard/my_offers/activate_driving_offer/<int:offer_id>", views.activate_driving_offer, name="activate_driving_offer"),
+    path("my_dashboard/my_offers/inactivate_driving_offer/<int:offer_id>", views.inactivate_driving_offer, name="inactivate_driving_offer"),
+    path("my_dashboard/my_offers/active_offers", views.active_driving_offer, name="active_driving_offer"),
+     path("my_dashboard/my_offers/inactive_offers", views.inactive_driving_offer, name="inactive_driving_offer"),
+    path("my_dashboard/my_offers/last_added_driving_offer", views.last_added_driving_offer, name="last_added_driving_offer"),
+    
    
     
    

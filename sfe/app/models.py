@@ -72,5 +72,9 @@ class Driving_offer(models.Model):
     driver=models.ForeignKey(Driver,on_delete=models.CASCADE,null=True)
     offer_type=models.CharField(max_length=30,choices=driving_offer_CHOICES)
     price_per_hour=models.IntegerField(null=True)
+    is_active=models.BooleanField(null=True,default=False)
 
 
+class Request_driving_offer(models.Model):
+    driving_offer = models.OneToOneField('Driving_offer', on_delete=models.CASCADE,null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE,null=True)
