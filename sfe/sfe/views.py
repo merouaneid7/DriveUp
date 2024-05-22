@@ -22,10 +22,55 @@ def home(request):
 
 def driving_offers(request):
     driving_offers=Driving_offer.objects.all()
+    cars=Car.objects.all()
+    bikes=Bike.objects.all()
+    trucks=Truck.objects.all()
     context={
         'driving_offers':driving_offers,
+        'cars':cars,
+        'bikes':bikes,
+        'trucks':trucks,
     }
     return render(request,"main/driving_offers.html",context)
+
+def request_driving_offer(request,offer_id):
+    user=request.user
+    driving_offer=Driving_offer.objects.filter(id=offer_id)
+    if request.method == 'POST':
+        horaire=request.POST.get('time')
+        vehicle_name=request.POST.get('vehicle_name')
+        
+
+        
+    print(user.last_name)
+    print(driving_offer)
+    print(horaire)
+    print(vehicle_name)
+    
+
+    return render(request,"main/driving_offers.html")
+        
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 def drivers_list(request):
     users = Driver.objects.all()

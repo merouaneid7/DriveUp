@@ -8,7 +8,9 @@ class User_otherfields(models.Model):
     user=models.OneToOneField(User,on_delete=models.CASCADE,null=True)
     profile_image=models.ImageField(upload_to="static" , null=True)
     cni=models.CharField(max_length=10,blank=True)
-
+    def __str__(self):
+        return self.user.username
+    
 
 
 
@@ -78,3 +80,46 @@ class Driving_offer(models.Model):
 class Request_driving_offer(models.Model):
     driving_offer = models.OneToOneField('Driving_offer', on_delete=models.CASCADE,null=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE,null=True)
+
+
+
+class Car(models.Model):
+    DEBUTANT='Debutant'
+    INTERMIDIAIRE='Intermidiare'
+    AVANCE='Avance'
+    
+    vehicle_level_CHOICES=[
+        (DEBUTANT,'Debutant'),
+        (INTERMIDIAIRE,'Intermidiare'),
+        (AVANCE,'Avance'),
+    ]
+    name=models.CharField(max_length=50,null=True)
+    level=models.CharField(max_length=20,null=True,choices=vehicle_level_CHOICES)
+  
+
+
+class Bike(models.Model):
+    DEBUTANT='Debutant'
+    INTERMIDIAIRE='Intermidiare'
+    AVANCE='Avance'
+    
+    vehicle_level_CHOICES=[
+        (DEBUTANT,'Debutant'),
+        (INTERMIDIAIRE,'Intermidiare'),
+        (AVANCE,'Avance'),
+    ]
+    name=models.CharField(max_length=50,null=True)
+    level=models.CharField(max_length=20,null=True,choices=vehicle_level_CHOICES)
+
+class Truck(models.Model):
+    DEBUTANT='Debutant'
+    INTERMIDIAIRE='Intermidiare'
+    AVANCE='Avance'
+    
+    vehicle_level_CHOICES=[
+        (DEBUTANT,'Debutant'),
+        (INTERMIDIAIRE,'Intermidiare'),
+        (AVANCE,'Avance'),
+    ]
+    name=models.CharField(max_length=50,null=True)
+    level=models.CharField(max_length=20,null=True,choices=vehicle_level_CHOICES)
