@@ -11,6 +11,8 @@ from django.core.paginator import Paginator,EmptyPage
 from app.models import *
 from django.contrib.auth.hashers import make_password
 from datetime import datetime
+from django.utils.html import format_html
+from django.urls import reverse
 
 
 
@@ -35,17 +37,23 @@ def driving_offers(request):
 
 def request_driving_offer(request,offer_id):
     user=request.user
-    driving_offer=Driving_offer.objects.filter(id=offer_id)
+    driving_offer=Driving_offer.objects.get(pk=offer_id)
     if request.method == 'POST':
         horaire=request.POST.get('time')
         vehicle_name=request.POST.get('vehicle_name')
-        
+        print("vehicle est")
+        request_driving_offer=Request_driving_offer.objects.create(user=user,driving_offer=driving_offer,time=horaire,vehicle_name=vehicle_name)
+        request_driving_offer.save()
+
+        mes_demandes_url = reverse('my_dash/welcome')
+        success_message = format_html('Votre <a href="{}" style="text-decoration: underline;" > Demande</a> a été envoyée ',mes_demandes_url)
+        messages.success(request,success_message)
+
+        return redirect("driving_offers")
+
 
         
-    print(user.last_name)
-    print(driving_offer)
-    print(horaire)
-    print(vehicle_name)
+    
     
 
     return render(request,"main/driving_offers.html")
@@ -190,26 +198,36 @@ def inactivate_driving_offer(request,offer_id):
     return redirect("my_dash/my_offers")
 
 def active_driving_offer(request):
-    driving_offers=Driving_offer.objects.filter(is_active=True)
+    current_d=request.user.driver
+    driving_offers=Driving_offer.objects.filter(is_active=True,driver=current_d)
     context={
         'driving_offers':driving_offers,
     }
     return render(request,"driver/driver_offers.html",context)
 
 def inactive_driving_offer(request):
-    driving_offers=Driving_offer.objects.filter(is_active=False)
+    current_d=request.user.driver
+    driving_offers=Driving_offer.objects.filter(is_active=False,driver=current_d)
     context={
         'driving_offers':driving_offers,
     }
     return render(request,"driver/driver_offers.html",context)
 
 def last_added_driving_offer(request):
-    driving_offers=Driving_offer.objects.all().order_by('-id')
+    current_d=request.user.driver
+    driving_offers=Driving_offer.objects.filter(driver=current_d).order_by('-id')
     context={
         'driving_offers':driving_offers,
     }
     return render(request,"driver/driver_offers.html",context)
 
+
+def my_driving_offer_requests(request):
+    my_requests=Request_driving_offer.objects.all()
+    context={
+        'my_requests':my_requests,
+    }
+    return render(request,"driver/my_driving_offer_requests.html",context)
 
 
 

@@ -78,8 +78,14 @@ class Driving_offer(models.Model):
 
 
 class Request_driving_offer(models.Model):
-    driving_offer = models.OneToOneField('Driving_offer', on_delete=models.CASCADE,null=True)
+    driving_offer = models.ForeignKey(Driving_offer, on_delete=models.CASCADE,null=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE,null=True)
+    time=models.TimeField(null=True)
+    vehicle_name=models.CharField(max_length=50,null=True)
+
+    def __str__(self):
+        return self.user.username
+    
 
 
 

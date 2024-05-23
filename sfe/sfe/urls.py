@@ -49,6 +49,7 @@ urlpatterns = [
      path("my_dashboard/my_offers/inactive_offers", views.inactive_driving_offer, name="inactive_driving_offer"),
     path("my_dashboard/my_offers/last_added_driving_offer", views.last_added_driving_offer, name="last_added_driving_offer"),
     path("my_dashboard/my_offers/request_driving_offer/<int:offer_id>", views.request_driving_offer, name="request_driving_offer"),
+    path("my_dashboard/my_requests", views.my_driving_offer_requests, name="my_driving_offer_requests"),
    
     
    
