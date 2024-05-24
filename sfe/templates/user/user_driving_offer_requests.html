@@ -45,11 +45,11 @@
 <div class="lg:w-[22rem] w-[24rem] h-auto mx-4 bg-white border border-t-4 border-t-purple-600 shadow-sm rounded-xl inline-block my-4 ">
           <div class="p-4 md:p-5">
                     <div class="flex-shrink-0 inline-block ">
-                              <img class="w-14 h-14 rounded-full inline-block" src="{{i.user.user_otherfields.profile_image.url}}" alt="Neil image">
+                              <img class="w-14 h-14 rounded-full inline-block" src="{{i.driving_offer.driver.user.user_otherfields.profile_image.url}}" >
                            </div>
                            <div class="flex-1 min-w-0 inline-block ">
                               <p class="font-sans text-xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900 mx-1 ">
-                                {{i.user.last_name}} {{i.user.first_name}}
+                                {{i.driving_offer.driver.user.last_name}} {{i.driving_offer.driver.user.first_name}}
                               </p>
                            </div>
                            <div class="pt-2"> 
@@ -73,6 +73,9 @@
                               <div class="py-0.5"></div>
                               <div class="pt-1 inline-block mr-4">
                                         <svg class="inline-block w-4 h-4 mr-1 mb-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M0 96l576 0c0-35.3-28.7-64-64-64H64C28.7 32 0 60.7 0 96zm0 32V416c0 35.3 28.7 64 64 64H512c35.3 0 64-28.7 64-64V128H0zM64 405.3c0-29.5 23.9-53.3 53.3-53.3H234.7c29.5 0 53.3 23.9 53.3 53.3c0 5.9-4.8 10.7-10.7 10.7H74.7c-5.9 0-10.7-4.8-10.7-10.7zM176 192a64 64 0 1 1 0 128 64 64 0 1 1 0-128zm176 16c0-8.8 7.2-16 16-16H496c8.8 0 16 7.2 16 16s-7.2 16-16 16H368c-8.8 0-16-7.2-16-16zm0 64c0-8.8 7.2-16 16-16H496c8.8 0 16 7.2 16 16s-7.2 16-16 16H368c-8.8 0-16-7.2-16-16zm0 64c0-8.8 7.2-16 16-16H496c8.8 0 16 7.2 16 16s-7.2 16-16 16H368c-8.8 0-16-7.2-16-16z"/></svg>
+                                        {% if i.time is "" %}
+                                        <p class="inline-block">{{i.driving_offer.price_per_hour}}Dhs par heure</p>
+                                        {% endif %}
                                         <p class="inline-block">{{i.time}} / {{i.driving_offer.price_per_hour}}Dhs par heure</p>
                               </div>
                               
@@ -91,29 +94,12 @@
                       {% endif %}
                       
                     </div>
-                    <div class="border-b pt-2">
-
-                    </div>
+                    
                     
 
                     
                     
-                    <div>
                     
-                    <div class="relative max-w-sm mt-3 ">
-                      <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
-                        <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                          <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
-                        </svg>
-                      </div>
-                      <form method="POST" action="{% url 'approuve_driving_offer_request' request_id=i.id %}">
-                              {% csrf_token %}
-                      <input readonly datepicker type="text" name="date" id="date" class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 " placeholder="Select date">
-                      </div>
-                      <button class="block mt-4 w-full bg-purple-600 text-white py-3 rounded-2xl hover:bg-yellow-300 transition " >Accepter</button>
-                     </form>
-                     
-                    </div>
                     
                     
                     

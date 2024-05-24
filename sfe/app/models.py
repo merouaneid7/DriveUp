@@ -75,6 +75,8 @@ class Driving_offer(models.Model):
     offer_type=models.CharField(max_length=30,choices=driving_offer_CHOICES)
     price_per_hour=models.IntegerField(null=True)
     is_active=models.BooleanField(null=True,default=False)
+    def __str__(self):
+        return self.driver.user.username
 
 
 class Request_driving_offer(models.Model):
@@ -82,6 +84,8 @@ class Request_driving_offer(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE,null=True)
     time=models.TimeField(null=True)
     vehicle_name=models.CharField(max_length=50,null=True)
+    date=models.TextField(null=True)
+    is_approuved=models.BooleanField(default=False,null=True)
 
     def __str__(self):
         return self.user.username

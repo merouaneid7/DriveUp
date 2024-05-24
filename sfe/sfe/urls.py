@@ -50,6 +50,9 @@ urlpatterns = [
     path("my_dashboard/my_offers/last_added_driving_offer", views.last_added_driving_offer, name="last_added_driving_offer"),
     path("my_dashboard/my_offers/request_driving_offer/<int:offer_id>", views.request_driving_offer, name="request_driving_offer"),
     path("my_dashboard/my_requests", views.my_driving_offer_requests, name="my_driving_offer_requests"),
+    path("my_dashboard/my_requests/approuve_driving_offer_request/<int:request_id>", views.approuve_driving_offer_request, name="approuve_driving_offer_request"),
+
+     path("my_dashboard/user/my_requests", views.user_driving_offer_request, name="user_driving_offer_request"),
    
     
    

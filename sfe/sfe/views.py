@@ -223,11 +223,71 @@ def last_added_driving_offer(request):
 
 
 def my_driving_offer_requests(request):
-    my_requests=Request_driving_offer.objects.all()
+    current_d=request.user.driver
+    my_requests=Request_driving_offer.objects.filter(driving_offer__driver=current_d)
     context={
         'my_requests':my_requests,
     }
     return render(request,"driver/my_driving_offer_requests.html",context)
+
+
+
+
+def approuve_driving_offer_request(request,request_id):
+    request_driving_offer=Request_driving_offer.objects.get(pk=request_id)
+    if request.method == "POST":
+        date1=request.POST.get('date')
+
+    if date1 is not ""  :   
+            Request_driving_offer.objects.filter(id=request_id).update(date=date1,is_approuved=True)
+            messages.success(request,"Demande approuve pour le " f"{date1}")
+            send_mail(
+                "Votre Demande de lesson de conduite est approuve",
+                "Bonjour " f"{request_driving_offer.user.last_name}" " , Votre demande est accepte pour la date " f"{date1} ." "pour l'horaire " f"{request_driving_offer.time}",
+                "ikkisauto@gmail.com",
+                [request_driving_offer.user.email],
+                fail_silently=False,
+
+            )
+            return redirect("my_driving_offer_requests")
+            
+    
+    elif request_driving_offer.is_approuved is True:
+        messages.error(request,"Demande deja approve pour le date "f"{request_driving_offer.date}")
+        return redirect("my_driving_offer_requests")
+    
+    else:
+        messages.error(request,"Date non valide")
+        return redirect("my_driving_offer_requests")
+
+    
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -308,9 +368,7 @@ def approve_appoint(request,app_id):
         date1=request.POST.get('date')
     actual_date=date.today()  
     actual_date_str = actual_date.strftime("%d/%m/%Y")
-    print(actual_date_str)
-    print(date1)
-    print(date1>actual_date_str)
+    
     
     
 
@@ -814,3 +872,12 @@ def welcome(request):
 
 def inbox(request):
     return render(request,"user/inbox.html")
+
+
+def user_driving_offer_request(request):
+    user=request.user
+    my_requests=Request_driving_offer.objects.filter(user=user)
+    context={
+        'my_requests':my_requests
+    }
+    return render(request,"user/user_driving_offer_requests.html",context)
