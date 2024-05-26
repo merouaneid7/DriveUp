@@ -10,7 +10,7 @@
       </div>
       <div class="sm:flex ml-4">
           <div class="items-center  mb-3 w-96 ">
-              <form class="lg:pr-3" action="search_user" method="GET">
+              <form class="lg:pr-3" action="{% url 'search_driving_offer' %}" method="GET">
               <label for="users-search" class="sr-only" >Search</label>
               <div class="relative mt-1 lg:w-64 xl:w-96">
                   <input type="text" name="search_input" id="search_input" class="bg-gray-50  text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5" placeholder="Nom,prenom ou e-mail">
@@ -29,29 +29,18 @@
 
               <div class="flex pl-0 mt-3 space-x-1 sm:pl-2 sm:mt-0">
                  
-                  <div id="dropdownAction" class=" hidden bg-gray-50 divide-y divide-gray-100 rounded-lg shadow w-44 p-6  ">
+                  <div id="dropdownAction" class=" hidden bg-gray-50 divide-y divide-gray-100 rounded-lg shadow w-44 p-6 z-50 ">
               <ul class="py-1 text-sm text-gray-700 " aria-labelledby="dropdownActionButton">
                   <li>
-                      <a href="{% url 'userlist' %}" class="block px-4 py-2 hover:bg-gray-100  text-gray-900">Tous</a>
+                      <a href="{% url 'driving_offers' %}" class="block px-4 py-2 hover:bg-gray-100  text-gray-900">Tous</a>
                   </li>
                   <li>
-                      <a href="{% url 'last_added' %}" class="block px-4 py-2 hover:bg-gray-100  text-gray-900">Dernier ajoute</a>
+                      <a href="{% url 'price_filter_driving_offer' %}" class="block px-4 py-2 hover:bg-gray-100  text-gray-900">Prix bas ver haut</a>
                   </li>
                   <li>
-                      <a href="{% url 'active_users' %}" class="block px-4 py-2 hover:bg-gray-100  text-gray-900">Active</a>
+                      <a href="{% url 'reversed_price_filter_driving_offer' %}" class="block px-4 py-2 hover:bg-gray-100  text-gray-900">Prix haut vers bas</a>
                   </li>
-                  <li>
-                      <a href="{% url 'inactive_users' %}" class="block px-4 py-2 hover:bg-gray-100  text-gray-900">inactive</a>
-                  </li>
-                  <li>
-                      <a href="{% url 'only_admin' %}" class="block px-4 py-2 hover:bg-gray-100  text-gray-900">admin</a>
-                  </li>
-                  <li>
-                      <a href="{% url 'only_client' %}" class="block px-4 py-2 hover:bg-gray-100  text-gray-900">client</a>
-                  </li>
-                  <li>
-                      <a href="{% url 'only_superviseur' %}" class="block px-4 py-2 hover:bg-gray-100  text-gray-900">Superviseur</a>
-                  </li>
+                  
               </ul>
               
           </div>
@@ -62,10 +51,31 @@
   </div>
 </div>
 </div>
+{% if not driving_offers %}
+<section class="bg-white ">
+    
+   
+  <div class="pt-4 px-4 mx-auto max-w-screen-xl lg:pt-16 lg:px-6">
+      
+      <div class="mx-auto max-w-screen-sm text-center">
+          
+          <h2>Aucun Utilisateur</h2>
+          <div class="flex justify-center items-center pt-4 "> <img class=" w-80 h-80" src="{% static 'C:\Users\lenovo\Desktop\sfep\sfe\static\404.png' %}"></div>
+          <div class="flex justify-center items-center">
+              <button type="button" class="text-white bg-purple-600 hover:bg-yellow-400 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 "><a href="{% url 'driving_offers' %}">Retour au page des offres</a></button>
+         
+          </div>  
+      </div>
+       
+      
+  </div>
+  
+</section>                               
+{% else %}
 {% for i in driving_offers  %}
 
                             <div
-                            class="inline-block my-4  sm:w-[38rem] md:w-[48rem] lg:w-[29rem] max-w-[36rem] ml-8  rounded-xl bg-gray-50 px-4 py-2  z-10 ">
+                            class="inline-block my-4  sm:w-[38rem] md:w-[48rem] lg:w-[29rem] max-w-[36rem] ml-8  rounded-xl bg-neutral-50 px-4 py-2  z-10 ">
                             <div
                               class="relative flex items-center gap-4 pt-0 pb-8 mx-0 mt-4 overflow-hidden text-gray-700  shadow-none   z-10">
                              
@@ -138,7 +148,7 @@
                                   </h5>
                                   <div class="flex items-center gap-0 ">
                                     {% if i.is_active is True %}
-                                    <button type="button" class="m-1 ms-0 mr-4 relative py-1 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border  shadow-sm disabled:opacity-50 bg-neutral-900 border-neutral-700 text-white hover:bg-neutral-800 z-50">
+                                    <button type="button" class="m-1 ms-0 mr-4 relative py-1 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border  shadow-sm disabled:opacity-50 bg-neutral-900 border-neutral-700 text-white hover:bg-neutral-800 z-10">
                                      
                                         <a  >Offre active</a>
                                        
@@ -151,7 +161,7 @@
                                      </span>
                                    </button>
                                    {% else %}
-                                   <button type="button" class="m-1 ms-0 mr-4 relative py-1 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border  shadow-sm disabled:opacity-50 bg-neutral-900 border-neutral-700 text-white hover:bg-neutral-800 z-50">
+                                   <button type="button" class="m-1 ms-0 mr-4 relative py-1 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border  shadow-sm disabled:opacity-50 bg-neutral-900 border-neutral-700 text-white hover:bg-neutral-800 z-10">
                                      
                                     <a  >Offre inactive</a>
                                     
@@ -371,6 +381,7 @@
                     </div>
            
                             {% endfor %}
+                            {% endif %}
                             
                               
                    

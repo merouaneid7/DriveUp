@@ -133,3 +133,7 @@ class Truck(models.Model):
     ]
     name=models.CharField(max_length=50,null=True)
     level=models.CharField(max_length=20,null=True,choices=vehicle_level_CHOICES)
+
+class subscriptions(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    email=models.EmailField(null=True, max_length=254)

@@ -13,6 +13,7 @@ from django.contrib.auth.hashers import make_password
 from datetime import datetime
 from django.utils.html import format_html
 from django.urls import reverse
+from django.db.models import Q
 
 
 
@@ -23,7 +24,7 @@ def home(request):
 
 
 def driving_offers(request):
-    driving_offers=Driving_offer.objects.all()
+    driving_offers=Driving_offer.objects.all().order_by("-id")
     cars=Car.objects.all()
     bikes=Bike.objects.all()
     trucks=Truck.objects.all()
@@ -61,7 +62,8 @@ def request_driving_offer(request,offer_id):
 
         
 
-
+def forgot_pass(request):
+    return render(request,"auth/forgot_pass.html")
 
 
 
@@ -169,7 +171,7 @@ def create_driving_offer(request):
         offer_type=request.POST.get("offer_type")
         price=request.POST.get("price")
 
-    driving_offer=Driving_offer.objects.create(driver=current_d,offer_type=offer_type,price_per_hour=price)
+    driving_offer=Driving_offer.objects.create(driver=current_d,offer_type=offer_type,price_per_hour=price,is_active=True)
     driving_offer.save()
     messages.success(request,"offre creer avec succes")
     return redirect("my_dash/my_offers")
@@ -261,12 +263,45 @@ def approuve_driving_offer_request(request,request_id):
         return redirect("my_driving_offer_requests")
 
     
+def search_driving_offer(request):
+    if request.method == "GET":
+        search_input=request.GET.get("search_input")
 
+    driving_offers=Driving_offer.objects.filter(
+
+        Q(driver__user__last_name__icontains=search_input) |
+        Q(driver__user__first_name__icontains=search_input) |
+        Q(offer_type__icontains=search_input) |
+        
+        Q(driver__level__icontains=search_input) |
+        Q(driver__vehicle__icontains=search_input)
+
+     )
+    print(driving_offers)
+    context={
+        'driving_offers':driving_offers,
+    }
+
+    return render(request,"main/driving_offers.html",context)
         
 
 
 
+def price_filter_driving_offer(request):
+    driving_offers=Driving_offer.objects.all().order_by("price_per_hour")
+    context={
+        'driving_offers':driving_offers,
+    }
 
+    return render(request,"main/driving_offers.html",context)
+
+def reversed_price_filter_driving_offer(request):
+    driving_offers=Driving_offer.objects.all().order_by("-price_per_hour")
+    context={
+        'driving_offers':driving_offers,
+    }
+
+    return render(request,"main/driving_offers.html",context)
 
 
 

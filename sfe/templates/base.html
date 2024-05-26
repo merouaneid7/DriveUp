@@ -76,7 +76,7 @@
                     <a href="{% url 'driving_offers' %}" class="block py-2 pr-4 pl-3 text-neutral-700 border-b border-neutral-100 hover:bg-neutral-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 ">Offres de Conduite</a>
                 </li>
                 <li>
-                    <a href="/#appointement" class="block py-2 pr-4 pl-3 text-neutral-700 border-b border-neutral-100 hover:bg-neutral-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 ">Rendez Vous</a>
+                    <a href="home/#appointement" class="block py-2 pr-4 pl-3 text-neutral-700 border-b border-neutral-100 hover:bg-neutral-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 ">Rendez Vous</a>
                 </li>
                 <li>
                     <a href="/#contact" class="block py-2 pr-4 pl-3 text-neutral-700 border-b border-neutral-100 hover:bg-neutral-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 ">Nous Contactez</a>
@@ -109,17 +109,17 @@
       <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
         
         <div class="col-span-full lg:col-span-1 z-50">
-          <a class="flex-none text-xl font-semibold text-neutral-950 hover:text-neutral-800" href="#" aria-label="Brand">Brand</a>
+          <a class="flex-none text-xl font-semibold text-neutral-950 hover:text-neutral-800" href="#" aria-label="Brand">DriveUp</a>
         </div>
         <!-- End Col -->
   
         <div class="col-span-1 z-50">
-          <h4 class="font-semibold text-neutral-800">Product</h4>
+          <h4 class="font-semibold text-neutral-800">Offre</h4>
   
           <div class="mt-3 grid space-y-3">
-            <p><a class="inline-flex gap-x-2 text-neutral-900 hover:text-neutral-700 " href="#">Pricing</a></p>
-            <p><a class="inline-flex gap-x-2 text-neutral-900 hover:text-neutral-700 " href="#">Changelog</a></p>
-            <p><a class="inline-flex gap-x-2 text-neutral-900 hover:text-neutral-700 " href="#">Docs</a></p>
+            <p><a class="inline-flex gap-x-2 text-neutral-900 hover:text-neutral-700 " href="{% url 'driving_offers' %}">Voiture</a></p>
+            <p><a class="inline-flex gap-x-2 text-neutral-900 hover:text-neutral-700 " href="{% url 'driving_offers' %}">Moto</a></p>
+            <p><a class="inline-flex gap-x-2 text-neutral-900 hover:text-neutral-700 " href="{% url 'driving_offers' %}">Poid lourd</a></p>
           </div>
         </div>
         <!-- End Col -->
@@ -128,29 +128,28 @@
           <h4 class="font-semibold  text-neutral-800">Company</h4>
   
           <div class="mt-3 grid space-y-3">
-            <p><a class="inline-flex gap-x-2   text-neutral-900 hover:text-neutral-700 " href="#">About us</a></p>
+            
             <p><a class="inline-flex gap-x-2  text-neutral-900 hover:text-neutral-700 " href="#">Blog</a></p>
-            <p><a class="inline-flex gap-x-2  text-neutral-900 hover:text-neutral-700 " href="#">Careers</a> <span class="inline ms-1 text-xs bg-purple-600 text-white py-1 px-2 rounded-lg">We're hiring</span></p>
-            <p><a class="inline-flex gap-x-2  text-neutral-900 hover:text-neutral-700 " href="#">Customers</a></p>
+            <p><a class="inline-flex gap-x-2  text-neutral-900 hover:text-neutral-700 " href="{% url 'home' %}#appointement">Agence</a> <span class="inline ms-1 text-xs bg-purple-600 text-white py-1 px-2 rounded-lg">Prenez un Rendez-vous !</span></p>
           </div>
         </div>
         <!-- End Col -->
   
         <div class="col-span-2 z-50">
-          <h4 class="font-semibold text-neutral-800">Stay up to date</h4>
+          <h4 class="font-semibold text-neutral-800">Rester à jour</h4>
   
           <form>
             <div class="mt-4 flex flex-col items-center gap-2 sm:flex-row sm:gap-3 bg-white rounded-lg p-2 dark:bg-neutral-900">
               <div class="w-full">
                 <label for="hero-input" class="sr-only">Search</label>
-                <input type="text" id="hero-input" name="hero-input" class="py-3 px-4 block w-full border-transparent rounded-lg text-sm  disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-transparent dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="Enter your email">
+                <input type="text" id="hero-input" name="hero-input" class="py-3 px-4 block w-full border-transparent rounded-lg text-sm  disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-transparent dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="Entre Votre email">
               </div>
               <a class="w-full sm:w-auto whitespace-nowrap p-3 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-purple-600 text-white hover:bg-yellow-400 disabled:opacity-50 disabled:pointer-events-none" href="#">
-                Subscribe
+                Se abonner
               </a>
             </div>
             <p class="mt-3 text-sm text-neutral-400">
-              New UI kits or big discounts. Never spam.
+              Juste des Nouveautées ,Non spam
             </p>
           </form>
         </div>
